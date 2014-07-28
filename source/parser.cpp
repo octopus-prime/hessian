@@ -18,33 +18,19 @@ namespace qi = boost::spirit::qi;
 
 namespace hessian {
 
+typedef qi::expectation_failure<boost::spirit::istream_iterator> expectation_failure;
+
 class expectation_exception
 :
 	public parser_exception
 {
 public:
-	expectation_exception(const qi::expectation_failure<boost::spirit::istream_iterator>& exception)
-	:
-		parser_exception(),
-		_what(build(exception))
-	{
-	}
-
+	expectation_exception(const expectation_failure& failure);
 	virtual ~expectation_exception() BOOST_NOEXCEPT_OR_NOTHROW {}
-
-	virtual const char* what() const BOOST_NOEXCEPT_OR_NOTHROW
-	{
-		return _what.c_str();
-	}
+	virtual const char* what() const BOOST_NOEXCEPT_OR_NOTHROW;
 
 protected:
-	static std::string build(const qi::expectation_failure<boost::spirit::istream_iterator>& exception)
-	{
-		boost::format what("Expected %s but found \"%s\".");
-		what % exception.what_;
-		what % std::string(exception.first, exception.last);
-		return what.str();
-	}
+	static std::string build(const expectation_failure& failure);
 
 private:
 	std::string _what;
@@ -85,12 +71,34 @@ parser::operator()()
 		if (!success)
 			throw std::runtime_error("failed");
 	}
-	catch(const qi::expectation_failure<parser_impl::input_iterator>& exception)
+	catch(const expectation_failure& failure)
 	{
-		throw expectation_exception(exception);
+		throw expectation_exception(failure);
 	}
 
 	return content;
+}
+
+expectation_exception::expectation_exception(const expectation_failure& failure)
+:
+	parser_exception(),
+	_what(build(failure))
+{
+}
+
+const char*
+expectation_exception::what() const BOOST_NOEXCEPT_OR_NOTHROW
+{
+	return _what.c_str();
+}
+
+std::string
+expectation_exception::build(const expectation_failure& failure)
+{
+	boost::format what("Expected %s but found \"%s\".");
+	what % failure.what_;
+	what % std::string(failure.first, failure.last);
+	return what.str();
 }
 
 }

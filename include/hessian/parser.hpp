@@ -56,9 +56,9 @@ public:
 	parser(std::istream& stream);
 
 	/**
-	 * Parses reply from stream.
-	 * @return The reply.
-	 * @throws parser_exception
+	 * Parses content from stream.
+	 * @return The content.
+	 * @throws parser_exception Failure while parsing.
 	 */
 	content_t operator()();
 

@@ -1,3 +1,5 @@
+using testing ;
+
 project hessian
 	:
 		usage-requirements
@@ -43,19 +45,17 @@ exe hessian_example
 #		<include>source
 #	;
 
-#unit-test vjoon_hessian_unit_test
-#	:
-#		[ glob test/unit/*.cpp ]
-#		[ glob test/unit/parser/*.cpp ]
-#		[ glob test/unit/generator/*.cpp ]
-#		[ glob test/fixture/*.cpp ]
-#		vjoon_hessian
-#		/site-config//boost_unit_test_framework
-#	:
-#		<define>BOOST_SPIRIT_USE_PHOENIX_V3
-#		<define>BOOST_TEST_DYN_LINK
+unit-test hessian_test
+	:
+		[ glob test/*.cpp ]
+		[ glob test/value_test/*.cpp ]
+		hessian
+		/site-config//boost_unit_test_framework
+	:
+		<define>BOOST_SPIRIT_USE_PHOENIX_V3
+		<define>BOOST_TEST_DYN_LINK
 #		<include>source
-#	;
+	;
 
 #doxygen vjoon_hessian.html
 #	:

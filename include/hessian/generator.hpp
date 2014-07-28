@@ -25,7 +25,7 @@ public:
 	generator(std::ostream& stream);
 
 	/**
-	 * Generates call into stream.
+	 * Generates content into stream.
 	 * @param method The method.
 	 * @param arguments The arguments.
 	 */
