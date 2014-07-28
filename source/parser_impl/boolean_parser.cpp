@@ -12,7 +12,7 @@ namespace parser_impl {
 
 boolean_parser::boolean_parser()
 :
-	qi::symbols<char, boolean_t, qi::tst_map<char, boolean_t> >()
+	qi::symbols<char, boolean_t>()
 {
 	add
 		("T", true)

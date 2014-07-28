@@ -20,13 +20,13 @@ namespace parser_impl {
 
 class type_parser
 :
-	public qi::grammar<input_iterator_t, void()>
+	public qi::grammar<input_iterator_t>
 {
 public:
 	type_parser();
 
 private:
-	qi::rule<input_iterator_t, void()> _type;
+	qi::rule<input_iterator_t> _type;
 	int_parser _int;
 	string_parser _string;
 };

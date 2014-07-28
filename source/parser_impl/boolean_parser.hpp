@@ -9,7 +9,6 @@
 
 #include <hessian/value.hpp>
 #include <boost/spirit/include/qi_symbols.hpp>
-#include <boost/spirit/home/qi/string/tst_map.hpp>
 
 namespace qi = boost::spirit::qi;
 
@@ -18,7 +17,7 @@ namespace parser_impl {
 
 class boolean_parser
 :
-	public qi::symbols<char, boolean_t, qi::tst_map<char, boolean_t> >
+	public qi::symbols<char, boolean_t>
 {
 public:
 	boolean_parser();
