@@ -14,29 +14,8 @@ namespace parser_test {
 
 BOOST_AUTO_TEST_SUITE(test_boolean)
 
-BOOST_AUTO_TEST_CASE(test_true)
-{
-	reply_t reply;
-
-	BOOST_REQUIRE_NO_THROW
-	(
-		reply = parse_reply("T");
-	)
-
-	BOOST_CHECK(equal_to()(reply, boolean_t(true)));
-}
-
-BOOST_AUTO_TEST_CASE(test_false)
-{
-	reply_t reply;
-
-	BOOST_REQUIRE_NO_THROW
-	(
-		reply = parse_reply("F");
-	)
-
-	BOOST_CHECK(equal_to()(reply, boolean_t(false)));
-}
+TEST_REPLY(test_true,	string_t("T", 1),	boolean_t(true))
+TEST_REPLY(test_false,	string_t("F", 1),	boolean_t(false))
 
 BOOST_AUTO_TEST_SUITE_END()
 
