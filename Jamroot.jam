@@ -33,6 +33,7 @@ unit-test hessian_test
 	:
 		[ glob test/*.cpp ]
 		[ glob test/value_test/*.cpp ]
+		[ glob test/parser_test/*.cpp ]
 		hessian
 		/site-config//boost_unit_test_framework
 	:
