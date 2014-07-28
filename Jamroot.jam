@@ -11,39 +11,22 @@ lib hessian
 		[ glob source/*.cpp ]
 		[ glob source/value_impl/*.cpp ]
 		[ glob source/parser_impl/*.cpp ]
-#		[ glob source/serialization/generator/*.cpp ]
-#		../vjoon_logging//vjoon_logging
 		/site-config//boost_date_time
 		/site-config//boost_system
-#		/site-config//PocoFoundation
-#		/site-config//PocoNet
 	:
-		<define>BOOST_SPIRIT_USE_PHOENIX_V3
 		<include>include
+		<define>BOOST_SPIRIT_USE_PHOENIX_V3
 	;
 
 exe hessian_example
 	:
 		[ glob example/*.cpp ]
 		hessian
-#		../vjoon_logging//vjoon_logging
 #		/site-config//PocoFoundation
 #		/site-config//PocoNet
+	:
+		<include>include
 	;
-
-#exe vjoon_hessian_integration_test
-#	:
-#		[ glob test/integration/*.cpp ]
-#		[ glob test/integration/arg/*.cpp ]
-#		[ glob test/integration/reply/*.cpp ]
-#		[ glob test/fixture/*.cpp ]
-#		vjoon_hessian
-#		/site-config//boost_unit_test_framework
-#	:
-#		<define>BOOST_SPIRIT_USE_PHOENIX_V3
-#		<define>BOOST_TEST_DYN_LINK
-#		<include>source
-#	;
 
 unit-test hessian_test
 	:
@@ -52,19 +35,7 @@ unit-test hessian_test
 		hessian
 		/site-config//boost_unit_test_framework
 	:
+		<include>include
 		<define>BOOST_SPIRIT_USE_PHOENIX_V3
 		<define>BOOST_TEST_DYN_LINK
-#		<include>source
 	;
-
-#doxygen vjoon_hessian.html
-#	:
-#		[ glob include/vjoon/hessian/*.hpp ]
-#	:
-#		<doxygen:param>"PROJECT_NAME=\"vjoon_hessian\""
-#		<doxygen:param>"PROJECT_BRIEF=\"vjoon_hessian\""
-#		<doxygen:param>"EXAMPLE_PATH=example"
-#		<doxygen:param>"JAVADOC_AUTOBRIEF=YES"
-#		<doxygen:param>"BUILTIN_STL_SUPPORT=YES"
-#		<doxygen:param>"TAB_SIZE=2"
-#	;
