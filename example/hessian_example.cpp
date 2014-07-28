@@ -151,10 +151,10 @@ main()
 //		test_map();
 //		test_object();
 //
-//		std::ostringstream request;
-//		generator generate(request);
-//		generate("foo", make_list(string_t("foo"))(true)(string_t("bar"))(int_t()));
-//		std::cout << request.str() << std::endl;
+		std::ostringstream request;
+		generator generate(request);
+		generate("foo", make_list(string_t("foo"))(true)(string_t("bar"))(int_t()));
+		std::cout << request.str() << std::endl;
 
 //		std::istringstream response(std::string("H\x02\x00RT", 5));
 //		std::istringstream response(std::string("H\x02\x00""F\x00\x00""Z", 7));
