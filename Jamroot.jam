@@ -11,6 +11,7 @@ lib hessian
 		[ glob source/*.cpp ]
 		[ glob source/value_impl/*.cpp ]
 		[ glob source/parser_impl/*.cpp ]
+		[ glob source/generator_impl/*.cpp ]
 		/site-config//boost_date_time
 		/site-config//boost_system
 	:
