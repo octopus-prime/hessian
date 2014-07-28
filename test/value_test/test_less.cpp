@@ -66,8 +66,8 @@ BOOST_AUTO_TEST_CASE(test_name)\
 
 BOOST_AUTO_TEST_SUITE(test_less)
 
-const date_t date_1 = boost::posix_time::microsec_clock::universal_time();
-const date_t date_2 = boost::posix_time::microsec_clock::universal_time();
+const date_t date_1 = boost::posix_time::second_clock::universal_time();
+const date_t date_2 = date_1 + boost::posix_time::seconds(1);
 
 BOOST_AUTO_TEST_CASE(less_null)
 {
