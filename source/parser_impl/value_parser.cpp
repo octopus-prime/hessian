@@ -68,11 +68,17 @@ value_parser::value_parser()
 	;
 
 	_nonterminal =
-			_list			[px::push_back(px::ref(_refs), qi::_1), qi::_val = qi::_1]
+			qi::eps						[qi::_a = px::bind(&std::vector<value_t>::size, px::ref(_refs)), px::push_back(px::ref(_refs), px::construct<value_t>())]
+			>>
+			(
+				_list
+				|
+				_map
+				|
+				_object
+			)									[px::at(px::ref(_refs), qi::_a) = qi::_1, qi::_val = qi::_1]
 			|
-			_map			[px::push_back(px::ref(_refs), qi::_1), qi::_val = qi::_1]
-			|
-			_object			[px::push_back(px::ref(_refs), qi::_1), qi::_val = qi::_1]
+			qi::eps 					[px::erase(px::ref(_refs), px::bind<refs_t::iterator>(&refs_t::begin, px::ref(_refs)) + qi::_a), qi::_pass = false]
 	;
 
 	_list =
@@ -84,29 +90,21 @@ value_parser::value_parser()
 	_list_1 =
 			qi::lit('W')
 			>>
-			qi::eps							[qi::_a = px::bind(&std::vector<value_t>::size, px::ref(_refs)), px::push_back(px::ref(_refs), px::construct<value_t>())]
-			>>
 			*(_value - qi::lit('Z'))
 			>>
 			qi::lit('Z')
-			>>
-			qi::eps							[px::at(px::ref(_refs), qi::_a) = qi::_val]
 	;
 
 	_list_2 =
 			qi::omit
 			[
-				_length 					[qi::_b = qi::_1]
+				_length 					[qi::_a = qi::_1]
 			]
 			>>
-			qi::eps							[qi::_a = px::bind(&std::vector<value_t>::size, px::ref(_refs)), px::push_back(px::ref(_refs), px::construct<value_t>())]
-			>>
-			qi::repeat(qi::_b)
+			qi::repeat(qi::_a)
 			[
 				_value
 			]
-			>>
-			qi::eps							[px::at(px::ref(_refs), qi::_a) = qi::_val]
 	;
 
 	_length =
@@ -151,9 +149,7 @@ value_parser::value_parser()
 
 	_map_1 =
 			qi::lit('H')
-			>>
-			qi::eps							[qi::_a = px::bind(&std::vector<value_t>::size, px::ref(_refs)), px::push_back(px::ref(_refs), px::construct<value_t>())]
-    		>>
+    	>>
 			*(
 				(_value - qi::lit('Z'))
 				>>
@@ -161,17 +157,13 @@ value_parser::value_parser()
 			)
 			>>
 			qi::lit('Z')
-			>>
-			qi::eps							[px::at(px::ref(_refs), qi::_a) = qi::_val]
 	;
 
 	_map_2 =
 			qi::lit('M')
 			>>
 			_type
-			>>
-			qi::eps							[qi::_a = px::bind(&std::vector<value_t>::size, px::ref(_refs)), px::push_back(px::ref(_refs), px::construct<value_t>())]
-    		>>
+   		>>
 			*(
 				(_value - qi::lit('Z'))
 				>>
@@ -179,27 +171,20 @@ value_parser::value_parser()
 			)
 			>>
 			qi::lit('Z')
-			>>
-			qi::eps							[px::at(px::ref(_refs), qi::_a) = qi::_val]
 	;
-
 
 	_object =
 			qi::omit
 			[
-				_index 						[qi::_b = qi::_1]//, qi::_c = 0]
+				_index 						[qi::_a = px::bind<defs_t::const_iterator>(&defs_t::begin, px::ref(_defs)) + qi::_1, qi::_b = px::bind(&def_t::size, *qi::_a), qi::_c = 0]
 			]
-			>>
-			qi::eps							[qi::_a = px::bind(&std::vector<value_t>::size, px::ref(_refs)), px::push_back(px::ref(_refs), px::construct<value_t>())]
 			>>
 			qi::repeat(qi::_b)
 			[
-				qi::string("foo")
+				qi::attr(px::at(*qi::_a, qi::_c++))
 				>>
 				_value
 			]
-			>>
-			qi::eps							[px::at(px::ref(_refs), qi::_a) = qi::_val]
 	;
 
 	_index =

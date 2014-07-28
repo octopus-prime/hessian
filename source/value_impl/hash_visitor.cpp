@@ -6,6 +6,7 @@
  */
 
 #include "hash_visitor.hpp"
+#include "../constant.hpp"
 
 namespace hessian {
 
@@ -24,8 +25,7 @@ hash_visitor::operator()(const null_t& value) const
 hash_visitor::result_type
 hash_visitor::operator()(const date_t& value) const
 {
-	static const boost::posix_time::ptime epoch(boost::gregorian::date(1970, 1, 1));
-	return static_cast<hash::result_type>((value - epoch).ticks());
+	return static_cast<hash::result_type>((value - constant::EPOCH).ticks());
 }
 
 hash_visitor::result_type
