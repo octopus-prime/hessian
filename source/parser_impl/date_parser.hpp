@@ -18,15 +18,15 @@ namespace parser_impl {
 
 class date_parser
 :
-	public qi::grammar<input_iterator, date_t()>
+	public qi::grammar<input_iterator_t, date_t()>
 {
 public:
 	date_parser();
 
 private:
-	qi::rule<input_iterator, date_t()> _date;
-	qi::rule<input_iterator, date_t()> _date_1;
-	qi::rule<input_iterator, date_t()> _date_2;
+	qi::rule<input_iterator_t, date_t()> _date;
+	qi::rule<input_iterator_t, date_t()> _date_1;
+	qi::rule<input_iterator_t, date_t()> _date_2;
 };
 
 }

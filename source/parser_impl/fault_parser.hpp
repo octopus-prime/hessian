@@ -20,13 +20,13 @@ namespace parser_impl {
 
 class fault_parser
 :
-	public qi::grammar<input_iterator, fault_t()>
+	public qi::grammar<input_iterator_t, fault_t()>
 {
 public:
 	fault_parser();
 
 private:
-	qi::rule<input_iterator, fault_t()> _fault;
+	qi::rule<input_iterator_t, fault_t()> _fault;
 	value_parser _value;
 };
 

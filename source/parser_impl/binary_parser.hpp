@@ -18,20 +18,20 @@ namespace parser_impl {
 
 class binary_parser
 :
-	public qi::grammar<input_iterator, binary_t()>
+	public qi::grammar<input_iterator_t, binary_t()>
 {
 public:
 	binary_parser();
 
 private:
-	qi::rule<input_iterator, binary_t()> _binary;
-	qi::rule<input_iterator, binary_t(), qi::locals<std::size_t> > _binary_1;
-	qi::rule<input_iterator, binary_t(), qi::locals<std::size_t> > _binary_2;
-	qi::rule<input_iterator, std::size_t()> _length;
-	qi::rule<input_iterator, std::size_t()> _length_1;
-	qi::rule<input_iterator, std::size_t()> _length_2;
-	qi::rule<input_iterator, std::size_t()> _length_3;
-	qi::rule<input_iterator, std::size_t()> _length_4;
+	qi::rule<input_iterator_t, binary_t()> _binary;
+	qi::rule<input_iterator_t, binary_t(), qi::locals<std::size_t> > _binary_1;
+	qi::rule<input_iterator_t, binary_t(), qi::locals<std::size_t> > _binary_2;
+	qi::rule<input_iterator_t, std::size_t()> _length;
+	qi::rule<input_iterator_t, std::size_t()> _length_1;
+	qi::rule<input_iterator_t, std::size_t()> _length_2;
+	qi::rule<input_iterator_t, std::size_t()> _length_3;
+	qi::rule<input_iterator_t, std::size_t()> _length_4;
 };
 
 }

@@ -12,7 +12,7 @@
 namespace hessian {
 namespace parser_impl {
 
-typedef boost::spirit::istream_iterator input_iterator;
+typedef boost::spirit::istream_iterator input_iterator_t;
 
 }
 }

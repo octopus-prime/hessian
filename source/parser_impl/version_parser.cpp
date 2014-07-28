@@ -6,6 +6,7 @@
  */
 
 #include "version_parser.hpp"
+#include "../constant.hpp"
 #include <boost/spirit/include/qi.hpp>
 
 namespace hessian {
@@ -17,12 +18,7 @@ version_parser::version_parser()
 	_version(std::string("version"))
 {
 	_version =
-			qi::lit(std::string("H\x02\x00", 3))
-//			qi::lit('H')
-//			>
-//			qi::lit('\x02')
-//			>
-//			qi::lit('\x00')
+			qi::lit(constant::VERSION)
 	;
 }
 

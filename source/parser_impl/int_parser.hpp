@@ -18,17 +18,17 @@ namespace parser_impl {
 
 class int_parser
 :
-	public qi::grammar<input_iterator, int_t()>
+	public qi::grammar<input_iterator_t, int_t()>
 {
 public:
 	int_parser();
 
 private:
-	qi::rule<input_iterator, int_t()> _int;
-	qi::rule<input_iterator, int_t()> _int_1;
-	qi::rule<input_iterator, int_t()> _int_2;
-	qi::rule<input_iterator, int_t()> _int_3;
-	qi::rule<input_iterator, int_t()> _int_4;
+	qi::rule<input_iterator_t, int_t()> _int;
+	qi::rule<input_iterator_t, int_t()> _int_1;
+	qi::rule<input_iterator_t, int_t()> _int_2;
+	qi::rule<input_iterator_t, int_t()> _int_3;
+	qi::rule<input_iterator_t, int_t()> _int_4;
 };
 
 }

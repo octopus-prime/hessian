@@ -19,18 +19,18 @@ namespace parser_impl {
 
 class double_parser
 :
-	public qi::grammar<input_iterator, double_t()>
+	public qi::grammar<input_iterator_t, double_t()>
 {
 public:
 	double_parser();
 
 private:
-	qi::rule<input_iterator, double_t()> _double;
+	qi::rule<input_iterator_t, double_t()> _double;
 	qi::symbols<char, double_t> _double_1;
-	qi::rule<input_iterator, double_t()> _double_2;
-	qi::rule<input_iterator, double_t()> _double_3;
-	qi::rule<input_iterator, double_t()> _double_4;
-	qi::rule<input_iterator, double_t()> _double_5;
+	qi::rule<input_iterator_t, double_t()> _double_2;
+	qi::rule<input_iterator_t, double_t()> _double_3;
+	qi::rule<input_iterator_t, double_t()> _double_4;
+	qi::rule<input_iterator_t, double_t()> _double_5;
 };
 
 }

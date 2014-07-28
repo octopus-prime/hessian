@@ -17,13 +17,13 @@ namespace parser_impl {
 
 class version_parser
 :
-	public qi::grammar<input_iterator, void()>
+	public qi::grammar<input_iterator_t>
 {
 public:
 	version_parser();
 
 private:
-	qi::rule<input_iterator, void()> _version;
+	qi::rule<input_iterator_t> _version;
 };
 
 }

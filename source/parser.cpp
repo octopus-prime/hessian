@@ -55,7 +55,7 @@ parser::operator()()
 	{
 		const bool success = qi::parse
 		(
-			parser_impl::input_iterator(_stream), parser_impl::input_iterator(),
+			parser_impl::input_iterator_t(_stream), parser_impl::input_iterator_t(),
 			qi::eps
 			>
 			version

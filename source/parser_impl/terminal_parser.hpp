@@ -26,13 +26,13 @@ namespace parser_impl {
 
 class terminal_parser
 :
-	public qi::grammar<input_iterator, value_t()>
+	public qi::grammar<input_iterator_t, value_t()>
 {
 public:
 	terminal_parser();
 
 private:
-	qi::rule<input_iterator, value_t()> _value;
+	qi::rule<input_iterator_t, value_t()> _value;
 	null_parser _null;
 	boolean_parser _boolean;
 	int_parser _int;

@@ -18,18 +18,18 @@ namespace parser_impl {
 
 class long_parser
 :
-	public qi::grammar<input_iterator, long_t()>
+	public qi::grammar<input_iterator_t, long_t()>
 {
 public:
 	long_parser();
 
 private:
-	qi::rule<input_iterator, long_t()> _long;
-	qi::rule<input_iterator, long_t()> _long_1;
-	qi::rule<input_iterator, long_t()> _long_2;
-	qi::rule<input_iterator, long_t()> _long_3;
-	qi::rule<input_iterator, long_t()> _long_4;
-	qi::rule<input_iterator, long_t()> _long_5;
+	qi::rule<input_iterator_t, long_t()> _long;
+	qi::rule<input_iterator_t, long_t()> _long_1;
+	qi::rule<input_iterator_t, long_t()> _long_2;
+	qi::rule<input_iterator_t, long_t()> _long_3;
+	qi::rule<input_iterator_t, long_t()> _long_4;
+	qi::rule<input_iterator_t, long_t()> _long_5;
 };
 
 }

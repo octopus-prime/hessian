@@ -20,13 +20,13 @@ namespace parser_impl {
 
 class def_parser
 :
-	public qi::grammar<input_iterator, std::vector<string_t>(), qi::locals<std::size_t> >
+	public qi::grammar<input_iterator_t, std::vector<string_t>(), qi::locals<std::size_t> >
 {
 public:
 	def_parser();
 
 private:
-	qi::rule<input_iterator, std::vector<string_t>(), qi::locals<std::size_t> > _def;
+	qi::rule<input_iterator_t, std::vector<string_t>(), qi::locals<std::size_t> > _def;
 	int_parser _int;
 	string_parser _string;
 };
