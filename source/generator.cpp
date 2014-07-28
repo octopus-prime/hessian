@@ -6,9 +6,14 @@
  */
 
 #include <hessian/generator.hpp>
+#include "generator_impl/output_iterator.hpp"
+#include "generator_impl/version_generator.hpp"
+#include "generator_impl/value_generator.hpp"
 #include <boost/spirit/include/karma.hpp>
+#include <boost/spirit/include/phoenix.hpp>
 
-namespace karma = boost::spirit::karma;
+namespace ka = boost::spirit::karma;
+namespace px = boost::phoenix;
 
 namespace hessian {
 
@@ -21,7 +26,28 @@ generator::generator(std::ostream& stream)
 void
 generator::operator()(const string_t& method, const list_t& arguments)
 {
-	_stream << method << ": " << arguments;
+	generator_impl::version_generator version;
+	generator_impl::value_generator value;
+
+//	return
+	ka::generate
+	(
+		generator_impl::output_iterator_t(_stream),
+		version										// version
+		<<
+		ka::lit('C')								// call
+		<<
+		ka::byte_ << ka::string						// method
+		<<
+		ka::byte_ << *value,						// arguments
+		method.size(),
+		method,
+		arguments.size() + '\x90',
+		arguments
+	);
+
+	// todo ka::byte_ => int_generator
 }
 
 }
+
