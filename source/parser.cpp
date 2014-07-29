@@ -40,6 +40,7 @@ parser::parser(std::istream& stream)
 :
 	_stream(stream)
 {
+	_stream.unsetf(std::ios::skipws);
 }
 
 content_t
