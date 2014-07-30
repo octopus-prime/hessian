@@ -6,9 +6,10 @@
  */
 
 #include "parser_helper.hpp"
-#include <boost/algorithm/string/erase.hpp>
 #include <boost/format.hpp>
+#include <boost/algorithm/string/erase.hpp>
 
+using boost::format;
 using boost::algorithm::erase_tail_copy;
 
 namespace hessian {
@@ -19,13 +20,11 @@ BOOST_AUTO_TEST_SUITE(test_string)
 static string_t
 make_string_1024()
 {
+	format f("%02d 456789012345678901234567890123456789012345678901234567890123\n");
+
 	string_t value;
-	boost::format f("%02d 456789012345678901234567890123456789012345678901234567890123\n");
 	for (std::size_t i = 0; i < 16; i++)
-	{
-		f % i;
-		value += f.str();
-	}
+		value += (f % i).str();
 	return value;
 }
 
@@ -38,15 +37,13 @@ make_string_1023()
 static string_t
 make_string_65536()
 {
+	format f("%03d 56789012345678901234567890123456789012345678901234567890123\n");
+
 	string_t value;
-	boost::format f("%03d 56789012345678901234567890123456789012345678901234567890123\n");
 	for (std::size_t j = 0; j < 2; j++)
 		for (std::size_t i = 0; i < 32 * 16; i++)
-		{
-			f % i;
-			value += f.str();
-		}
-	return erase_tail_copy(value, 1);
+			value += (f % i).str();
+	return value;
 }
 
 static const string_t string_0 = string_t();
@@ -102,7 +99,7 @@ TEST_REPLY
 TEST_REPLY
 (
 	test_string_65536,
-	string_t("\x52\x80\x00", 3) + make_string_65536().insert(32768, string_t("S\x7f\xff", 3)),
+	string_t("R\xff\xff", 3) + string_t(string_65536).insert(65535, 1, '\x01'),
 	string_65536
 )
 
