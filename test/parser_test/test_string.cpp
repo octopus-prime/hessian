@@ -46,12 +46,19 @@ make_string_65536()
 	return value;
 }
 
+static string_t
+make_string_65535()
+{
+	return erase_tail_copy(make_string_65536(), 1);
+}
+
 static const string_t string_0 = string_t();
 static const string_t string_1 = string_t("0");
 static const string_t string_31 = string_t("0123456789012345678901234567890");
 static const string_t string_32 = string_t("01234567890123456789012345678901");
 static const string_t string_1023 = make_string_1023();
 static const string_t string_1024 = make_string_1024();
+static const string_t string_65535 = make_string_65535();
 static const string_t string_65536 = make_string_65536();
 
 TEST_REPLY
@@ -94,6 +101,13 @@ TEST_REPLY
 	test_string_1024,
 	string_t("S\x04\x00", 3) + string_1024,
 	string_1024
+)
+
+TEST_REPLY
+(
+	test_string_65535,
+	string_t("R\x80\x00", 3) + string_t(string_65535).insert(32768, string_t("S\x7f\xff", 3)),
+	string_65535
 )
 
 TEST_REPLY
