@@ -55,7 +55,7 @@ binary_parser::binary_parser()
 				qi::byte_
 			]
 			>>
-			_binary							[qi::_val += qi::_1]
+			_binary
 	;
 
 	_length =
