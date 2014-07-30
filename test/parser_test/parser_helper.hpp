@@ -29,5 +29,21 @@ BOOST_AUTO_TEST_CASE(test_name)\
 	BOOST_CHECK(equal_to()(reply, expected_value));\
 }
 
+fault_t
+parse_fault(const string_t& fault);
+
+#define TEST_FAULT(test_name, fault_value, expected_value) \
+BOOST_AUTO_TEST_CASE(test_name)\
+{\
+	fault_t fault;\
+\
+	BOOST_REQUIRE_NO_THROW\
+	(\
+		fault = parse_fault(fault_value);\
+	)\
+\
+	BOOST_CHECK(equal_to()(fault, expected_value));\
+}
+
 }
 }

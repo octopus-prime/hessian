@@ -20,5 +20,14 @@ parse_reply(const string_t& reply)
 	return boost::get<reply_t>(content);
 }
 
+fault_t
+parse_fault(const string_t& fault)
+{
+	std::istringstream stream(constant::VERSION + "F" + fault);
+	parser parse(stream);
+	const content_t content = parse();
+	return boost::get<fault_t>(content);
+}
+
 }
 }
