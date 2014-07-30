@@ -55,7 +55,7 @@ string_parser::string_parser()
 				qi::char_
 			]
 			>>
-			_string							[qi::_val += qi::_1]
+			_string
 	;
 
 	_length =
