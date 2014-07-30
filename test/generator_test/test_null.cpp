@@ -16,7 +16,7 @@ TEST_CALL
 (
 	test_null,
 	make_list(null_t()),
-	std::string("\x91N", 2)
+	std::string("\x91""N", 2)
 )
 
 BOOST_AUTO_TEST_SUITE_END()
