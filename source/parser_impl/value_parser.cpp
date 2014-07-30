@@ -176,12 +176,12 @@ value_parser::value_parser()
 	_object =
 			qi::omit
 			[
-				_index 						[qi::_a = px::bind<defs_t::const_iterator>(&defs_t::begin, px::ref(_defs)) + qi::_1, qi::_b = px::bind(&def_t::size, *qi::_a), qi::_c = 0]
+				_index 						[qi::_a = qi::_1, qi::_b = 0]
 			]
 			>>
-			qi::repeat(qi::_b)
+			qi::repeat(px::bind(&def_t::size, px::at(px::ref(_defs), qi::_a)))
 			[
-				qi::attr(px::at(*qi::_a, qi::_c++))
+				qi::attr(px::at(px::at(px::ref(_defs), qi::_a), qi::_b++))
 				>>
 				_value
 			]

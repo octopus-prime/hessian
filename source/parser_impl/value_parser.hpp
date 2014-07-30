@@ -54,7 +54,7 @@ private:
 	qi::rule<input_iterator_t, map_t()> _map;
 	qi::rule<input_iterator_t, map_t()> _map_1;
 	qi::rule<input_iterator_t, map_t()> _map_2;
-	qi::rule<input_iterator_t, object_t(), qi::locals<defs_t::const_iterator, std::size_t, std::size_t> > _object;
+	qi::rule<input_iterator_t, object_t(), qi::locals<std::size_t, std::size_t> > _object;
 	qi::rule<input_iterator_t, std::size_t()> _index;
 	qi::rule<input_iterator_t, std::size_t()> _index_1;
 	qi::rule<input_iterator_t, std::size_t()> _index_2;
