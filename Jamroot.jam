@@ -34,6 +34,7 @@ exe hessian_example
 unit-test hessian_test
 	:
 		[ glob test/*.cpp ]
+		[ glob test/fixture/*.cpp ]
 		[ glob test/value_test/*.cpp ]
 		[ glob test/parser_test/*.cpp ]
 		[ glob test/generator_test/*.cpp ]
