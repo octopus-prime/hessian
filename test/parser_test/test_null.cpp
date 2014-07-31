@@ -6,18 +6,16 @@
  */
 
 #include "parser_helper.hpp"
+#include "../fixture/fixture_null.hpp"
 
 namespace hessian {
 namespace parser_test {
 
-BOOST_AUTO_TEST_SUITE(test_null)
+#define TEST_NULL() TEST_REPLY(test_parse_null, hessian, null)
 
-TEST_REPLY
-(
-	test_null,
-	string_t("N", 1),
-	null_t()
-)
+BOOST_FIXTURE_TEST_SUITE(test_parse_null, fixture::fixture_null)
+
+TEST_NULL();
 
 BOOST_AUTO_TEST_SUITE_END()
 

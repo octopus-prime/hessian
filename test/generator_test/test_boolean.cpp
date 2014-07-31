@@ -6,25 +6,17 @@
  */
 
 #include "generator_helper.hpp"
+#include "../fixture/fixture_boolean.hpp"
 
 namespace hessian {
 namespace generator_test {
 
-BOOST_AUTO_TEST_SUITE(test_boolean)
+#define TEST_BOOLEAN(CASE) TEST_CALL(test_generate_boolean_##CASE, boolean_##CASE, hessian_##CASE)
 
-TEST_CALL
-(
-	test_true,
-	boolean_t(true),
-	string_t("T", 1)
-)
+BOOST_FIXTURE_TEST_SUITE(test_generate_boolean, fixture::fixture_boolean)
 
-TEST_CALL
-(
-	test_false,
-	boolean_t(false),
-	string_t("F", 1)
-)
+TEST_BOOLEAN(true);
+TEST_BOOLEAN(false);
 
 BOOST_AUTO_TEST_SUITE_END()
 

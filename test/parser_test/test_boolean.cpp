@@ -6,25 +6,17 @@
  */
 
 #include "parser_helper.hpp"
+#include "../fixture/fixture_boolean.hpp"
 
 namespace hessian {
 namespace parser_test {
 
-BOOST_AUTO_TEST_SUITE(test_boolean)
+#define TEST_BOOLEAN(CASE) TEST_REPLY(test_parse_boolean_##CASE, hessian_##CASE, boolean_##CASE)
 
-TEST_REPLY
-(
-	test_true,
-	string_t("T", 1),
-	boolean_t(true)
-)
+BOOST_FIXTURE_TEST_SUITE(test_parse_boolean, fixture::fixture_boolean)
 
-TEST_REPLY
-(
-	test_false,
-	string_t("F", 1),
-	boolean_t(false)
-)
+TEST_BOOLEAN(true);
+TEST_BOOLEAN(false);
 
 BOOST_AUTO_TEST_SUITE_END()
 

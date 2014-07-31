@@ -6,18 +6,16 @@
  */
 
 #include "generator_helper.hpp"
+#include "../fixture/fixture_null.hpp"
 
 namespace hessian {
 namespace generator_test {
 
-BOOST_AUTO_TEST_SUITE(test_null)
+#define TEST_NULL() TEST_CALL(test_generate_null, null, hessian)
 
-TEST_CALL
-(
-	test_null,
-	null_t(),
-	string_t("N", 1)
-)
+BOOST_FIXTURE_TEST_SUITE(test_generate_null, fixture::fixture_null)
+
+TEST_NULL();
 
 BOOST_AUTO_TEST_SUITE_END()
 
