@@ -15,15 +15,15 @@ BOOST_AUTO_TEST_SUITE(test_boolean)
 TEST_CALL
 (
 	test_true,
-	make_list(boolean_t(true)),
-	string_t("\x91""T", 2)
+	boolean_t(true),
+	string_t("T", 1)
 )
 
 TEST_CALL
 (
 	test_false,
-	make_list(boolean_t(false)),
-	string_t("\x91""F", 2)
+	boolean_t(false),
+	string_t("F", 1)
 )
 
 BOOST_AUTO_TEST_SUITE_END()
