@@ -16,14 +16,14 @@ TEST_CALL
 (
 	test_true,
 	make_list(boolean_t(true)),
-	std::string("\x91""T", 2)
+	string_t("\x91""T", 2)
 )
 
 TEST_CALL
 (
 	test_false,
 	make_list(boolean_t(false)),
-	std::string("\x91""F", 2)
+	string_t("\x91""F", 2)
 )
 
 BOOST_AUTO_TEST_SUITE_END()

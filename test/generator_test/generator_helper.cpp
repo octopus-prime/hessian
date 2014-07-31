@@ -10,7 +10,7 @@
 namespace hessian {
 namespace generator_test {
 
-std::string
+string_t
 generate_call(const list_t& arguments)
 {
 	std::ostringstream stream;

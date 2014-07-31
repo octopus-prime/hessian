@@ -14,13 +14,13 @@
 namespace hessian {
 namespace generator_test {
 
-std::string
+string_t
 generate_call(const list_t& arguments);
 
 #define TEST_CALL(test_name, arguments, expected) \
 BOOST_AUTO_TEST_CASE(test_name)\
 {\
-	std::string call;\
+	string_t call;\
 \
 	BOOST_REQUIRE_NO_THROW\
 	(\
