@@ -86,7 +86,8 @@ TEST_REPLY
 (
 	test_long_0x3ffff,
 	string_t("\x3f\xff\xff", 3),
-	long_t(0x3ffffLL))
+	long_t(0x3ffffLL)
+)
 
 TEST_REPLY
 (
