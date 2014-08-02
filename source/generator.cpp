@@ -29,8 +29,7 @@ generator::operator()(const string_t& method, const list_t& arguments)
 	generator_impl::version_generator version;
 	generator_impl::value_generator value;
 
-//	return
-	ka::generate
+	const bool success = ka::generate
 	(
 		generator_impl::output_iterator_t(_stream),
 		version										// version
@@ -45,6 +44,9 @@ generator::operator()(const string_t& method, const list_t& arguments)
 		arguments.size() + '\x90',
 		arguments
 	);
+
+	if (!success)
+		throw std::runtime_error("generator failed");
 
 	// todo ka::byte_ => int_generator
 }

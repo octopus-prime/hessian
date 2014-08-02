@@ -70,7 +70,7 @@ parser::operator()()
 		);
 
 		if (!success)
-			throw std::runtime_error("failed");
+			throw std::runtime_error("parser failed");
 	}
 	catch(const expectation_failure& failure)
 	{
