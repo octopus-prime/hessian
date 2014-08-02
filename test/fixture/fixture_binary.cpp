@@ -30,7 +30,7 @@ const string_t fixture_binary::hessian_16 = string_t("\x34\x10", 2) + string_16;
 const string_t fixture_binary::hessian_1023 = string_t("\x37\xff", 2) + fixture_string::string_1023;
 const string_t fixture_binary::hessian_1024 = string_t("B\x04\x00", 3) + fixture_string::string_1024;
 const string_t fixture_binary::hessian_65535 = string_t("A\x80\x00", 3) + string_t(fixture_string::string_65535).insert(32768, string_t("B\x7f\xff", 3));
-const string_t fixture_binary::hessian_65536 = string_t("R\xff\xff", 3) + string_t("A\xff\xff", 3) + string_t(fixture_string::string_65536).insert(65535, 1, '\x21');
+const string_t fixture_binary::hessian_65536 = string_t("A\xff\xff", 3) + string_t(fixture_string::string_65536).insert(65535, 1, '\x21');
 
 }
 }
