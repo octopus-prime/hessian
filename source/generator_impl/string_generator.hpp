@@ -18,15 +18,15 @@ namespace generator_impl {
 
 class string_generator
 :
-	public ka::grammar<output_iterator_t, std::string()>
+	public ka::grammar<output_iterator_t, string_t()>
 {
 public:
 	string_generator();
 
 private:
-	ka::rule<output_iterator_t, std::string()> _string;
-	ka::rule<output_iterator_t, std::string()> _string_1;
-	ka::rule<output_iterator_t, std::string()> _string_2;
+	ka::rule<output_iterator_t, string_t()> _string;
+	ka::rule<output_iterator_t, string_t()> _string_1;
+	ka::rule<output_iterator_t, string_t()> _string_2;
 	ka::rule<output_iterator_t, void(std::size_t)> _length;
 	ka::rule<output_iterator_t, void(std::size_t)> _length_1;
 	ka::rule<output_iterator_t, void(std::size_t)> _length_2;
