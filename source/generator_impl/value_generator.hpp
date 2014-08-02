@@ -17,6 +17,7 @@
 #include "long_generator.hpp"
 #include "double_generator.hpp"
 #include "def_generator.hpp"
+#include "binary_generator.hpp"
 #include <boost/spirit/include/karma_grammar.hpp>
 
 namespace ka = boost::spirit::karma;
@@ -44,6 +45,7 @@ private:
 	null_generator _null;
 	double_generator _double;
 	def_generator _def;
+	binary_generator _binary;
 
 	// Non terminals
 	ka::rule<output_iterator_t, map_t()> _map;

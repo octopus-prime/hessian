@@ -55,6 +55,7 @@ value_generator::value_generator()
 	_null(),
 	_double(),
 	_def(),
+	_binary(),
 	_map(),
 	_pair(),
 	_list(),
@@ -62,7 +63,7 @@ value_generator::value_generator()
 	_list_2(),
 	_object()
 {
-	_value = _int | _long | _date | _boolean | _string | _list | _map | _null | _double | _object;
+	_value = _int | _long | _date | _boolean | _string | _binary | _list | _map | _null | _double | _object;
 
 	_map = ka::lit('H') << *_pair << ka::lit('Z');
 
