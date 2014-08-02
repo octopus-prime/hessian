@@ -27,7 +27,8 @@ BOOST_AUTO_TEST_CASE(test_name)\
 		call = generate_call(make_list(argument));\
 	)\
 \
-	BOOST_CHECK_EQUAL(call, constant::VERSION + "C""\x06""method""\x91" + expected);\
+	const std::string foo = constant::VERSION + "C""\x06""method""\x91" + expected;\
+	BOOST_CHECK_EQUAL_COLLECTIONS(call.begin(), call.end(), foo.begin(), foo.end());\
 }
 
 }
