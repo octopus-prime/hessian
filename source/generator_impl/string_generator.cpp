@@ -43,7 +43,7 @@ string_generator::string_generator()
 			<<
 			ka::string [ka::_1 = px::bind(&string_t::substr, ka::_val, 0, 0xffff)]
 			<<
-			_string [ka::_1 = px::bind(&string_t::substr, ka::_val, 0xffff, std::string::npos)]
+			_string [ka::_1 = px::bind(&string_t::substr, ka::_val, 0xffff, string_t::npos)]
 	;
 
 	_length =
