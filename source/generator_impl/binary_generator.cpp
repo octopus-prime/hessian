@@ -11,21 +11,15 @@
 
 namespace px = boost::phoenix;
 
-namespace boost { namespace spirit { namespace traits
-{
-    template <>
-    struct transform_attribute<hessian::binary_t const, hessian::string_t, karma::domain>
-    {
-        typedef hessian::string_t type;
-        static type pre(hessian::binary_t const& value)
-        {
-        	return type(value.begin(), value.end());
-        }
-    };
-}}}
-
 namespace hessian {
 namespace generator_impl {
+
+static string_t
+workaround_for_string_issue(const binary_t& binary)
+{
+	const binary_t substr = binary.substr(0, 0xffff);
+	return string_t(substr.begin(), substr.end());
+}
 
 binary_generator::binary_generator()
 :
@@ -53,9 +47,11 @@ binary_generator::binary_generator()
 
 	_binary_2 =
 			_length_4
-//			TODO: Does not compile, so test_generate_binary_65536 fails :(
+//			TODO: Does not compile, so we use bad workaround here.
 //			<<
 //			ka::string [ka::_1 = px::bind(&binary_t::substr, ka::_val, 0, 0xffff)]
+			<<
+			ka::string [ka::_1 = px::bind(workaround_for_string_issue, ka::_val)]
 			<<
 			_binary [ka::_1 = px::bind(&binary_t::substr, ka::_val, 0xffff, binary_t::npos)]
 	;
