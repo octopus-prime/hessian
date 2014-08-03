@@ -20,7 +20,7 @@ TEST_OBJECT(1);
 TEST_OBJECT(2);
 TEST_OBJECT(2a);
 TEST_OBJECT(2b);
-// NOTE: Skipping test_object_3 because of cycles.
+// TODO: Skipping test_object_3 because of cycles.
 TEST_OBJECT(16);
 
 BOOST_AUTO_TEST_SUITE_END()
