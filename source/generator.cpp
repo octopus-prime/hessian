@@ -17,6 +17,16 @@ namespace px = boost::phoenix;
 
 namespace hessian {
 
+class generator_failure_exception
+:
+	public generator_exception
+{
+public:
+	generator_failure_exception();
+	virtual ~generator_failure_exception() BOOST_NOEXCEPT_OR_NOTHROW {}
+	virtual const char* what() const BOOST_NOEXCEPT_OR_NOTHROW;
+};
+
 generator::generator(std::ostream& stream)
 :
 	_stream(stream)
@@ -46,10 +56,21 @@ generator::operator()(const string_t& method, const list_t& arguments)
 	);
 
 	if (!success)
-		throw std::runtime_error("generator failed");
+		throw generator_failure_exception();
 
 	// todo ka::byte_ => int_generator
 }
 
+generator_failure_exception::generator_failure_exception()
+:
+	generator_exception()
+{
 }
 
+const char*
+generator_failure_exception::what() const BOOST_NOEXCEPT_OR_NOTHROW
+{
+	return "Generating failed.";
+}
+
+}

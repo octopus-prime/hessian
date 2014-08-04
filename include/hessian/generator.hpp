@@ -8,9 +8,21 @@
 #pragma once
 
 #include <hessian/value.hpp>
+#include <hessian/exception.hpp>
 #include <iostream>
 
 namespace hessian {
+
+/**
+ * Defines generator exception.
+ */
+class generator_exception
+:
+	public exception
+{
+protected:
+	virtual ~generator_exception() BOOST_NOEXCEPT_OR_NOTHROW {}
+};
 
 /**
  * Implements generator.
