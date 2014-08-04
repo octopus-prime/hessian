@@ -6,49 +6,10 @@
  */
 
 #include "fixture_string.hpp"
-#include <boost/format.hpp>
-#include <boost/algorithm/string/erase.hpp>
-
-using boost::format;
-using boost::algorithm::erase_tail_copy;
+#include "string_helper.hpp"
 
 namespace hessian {
 namespace fixture {
-
-static string_t
-make_string_1024()
-{
-	format f("%02d 456789012345678901234567890123456789012345678901234567890123\n");
-
-	string_t value;
-	for (std::size_t i = 0; i < 16; i++)
-		value += (f % i).str();
-	return value;
-}
-
-static string_t
-make_string_1023()
-{
-	return erase_tail_copy(make_string_1024(), 1);
-}
-
-static string_t
-make_string_65536()
-{
-	format f("%03d 56789012345678901234567890123456789012345678901234567890123\n");
-
-	string_t value;
-	for (std::size_t j = 0; j < 2; j++)
-		for (std::size_t i = 0; i < 32 * 16; i++)
-			value += (f % i).str();
-	return value;
-}
-
-static string_t
-make_string_65535()
-{
-	return erase_tail_copy(make_string_65536(), 1);
-}
 
 const string_t fixture_string::string_0 = string_t();
 const string_t fixture_string::string_1 = string_t("0");
