@@ -53,24 +53,26 @@ content_visitor::operator()(const hessian::fault_t& content) const
 class session_impl
 {
 protected:
-	session_impl(const std::string& host, const boost::uint16_t port);
+	session_impl(const std::string& host, const boost::uint16_t port, const std::string& path);
 	virtual ~session_impl() BOOST_NOEXCEPT_OR_NOTHROW {}
 	hessian::content_t call(const std::string& method, const hessian::list_t& arguments);
 
 private:
 	Poco::Net::HTTPClientSession _session;
+	std::string _path;
 };
 
-session_impl::session_impl(const std::string& host, const boost::uint16_t port)
+session_impl::session_impl(const std::string& host, const boost::uint16_t port, const std::string& path)
 :
-	_session(host, port)
+	_session(host, port),
+	_path(path)
 {
 }
 
 hessian::content_t
 session_impl::call(const std::string& method, const hessian::list_t& arguments)
 {
-	Poco::Net::HTTPRequest request(Poco::Net::HTTPRequest::HTTP_POST, "/test/test2", Poco::Net::HTTPMessage::HTTP_1_1);
+	Poco::Net::HTTPRequest request(Poco::Net::HTTPRequest::HTTP_POST, _path, Poco::Net::HTTPMessage::HTTP_1_1);
 	request.setChunkedTransferEncoding(true);
 
 	std::ostream& request_stream = _session.sendRequest(request);
@@ -102,7 +104,7 @@ public:
 service_impl::service_impl(const std::string& host, const boost::uint16_t port)
 :
 	service_base(),
-	session_impl(host, port)
+	session_impl(host, port, "/test/test2")
 {
 }
 
