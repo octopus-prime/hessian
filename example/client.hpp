@@ -29,9 +29,10 @@ protected:
 	virtual ~service_base() BOOST_NOEXCEPT_OR_NOTHROW {}
 
 public:
-	virtual void test_int_0() = 0;
-	virtual void test_double_0_0() = 0;
-	virtual void test_object_1(const object_1& dto) = 0;
+	virtual void arg_int_0(const boost::int32_t value) = 0;
+	virtual void arg_double_0_0(const double value) = 0;
+	virtual void arg_object_1(const object_1& dto) = 0;
+	virtual object_1 reply_object_1() = 0;
 };
 
 typedef boost::shared_ptr<service_base> service;

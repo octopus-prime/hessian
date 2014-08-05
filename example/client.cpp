@@ -50,11 +50,11 @@ content_visitor::operator()(const hessian::fault_t& content) const
 	std::cout << "fault = " << content << std::endl;
 }
 
-class session_impl
+class abstract_service_impl
 {
 protected:
-	session_impl(const std::string& host, const boost::uint16_t port, const std::string& path);
-	virtual ~session_impl() BOOST_NOEXCEPT_OR_NOTHROW {}
+	abstract_service_impl(const std::string& host, const boost::uint16_t port, const std::string& path);
+	virtual ~abstract_service_impl() BOOST_NOEXCEPT_OR_NOTHROW {}
 	hessian::content_t call(const std::string& method, const hessian::list_t& arguments);
 
 private:
@@ -62,7 +62,7 @@ private:
 	std::string _path;
 };
 
-session_impl::session_impl(const std::string& host, const boost::uint16_t port, const std::string& path)
+abstract_service_impl::abstract_service_impl(const std::string& host, const boost::uint16_t port, const std::string& path)
 :
 	_session(host, port),
 	_path(path)
@@ -70,7 +70,7 @@ session_impl::session_impl(const std::string& host, const boost::uint16_t port, 
 }
 
 hessian::content_t
-session_impl::call(const std::string& method, const hessian::list_t& arguments)
+abstract_service_impl::call(const std::string& method, const hessian::list_t& arguments)
 {
 	Poco::Net::HTTPRequest request(Poco::Net::HTTPRequest::HTTP_POST, _path, Poco::Net::HTTPMessage::HTTP_1_1);
 	request.setChunkedTransferEncoding(true);
@@ -91,45 +91,70 @@ session_impl::call(const std::string& method, const hessian::list_t& arguments)
 class service_impl
 :
 	public virtual service_base,
-	public session_impl
+	public abstract_service_impl
 {
 public:
 	service_impl(const std::string& host, const boost::uint16_t port);
 	virtual ~service_impl() BOOST_NOEXCEPT_OR_NOTHROW {}
-	virtual void test_int_0();
-	virtual void test_double_0_0();
-	virtual void test_object_1(const object_1& dto);
+	virtual void arg_int_0(const boost::int32_t value);
+	virtual void arg_double_0_0(const double value);
+	virtual void arg_object_1(const object_1& dto);
+	virtual object_1 reply_object_1();
 };
 
 service_impl::service_impl(const std::string& host, const boost::uint16_t port)
 :
 	service_base(),
-	session_impl(host, port, "/test/test2")
+	abstract_service_impl(host, port, "/test/test2")
 {
 }
 
 void
-service_impl::test_int_0()
+service_impl::arg_int_0(const boost::int32_t value)
 {
-	const hessian::int_t object = 0;
-	const hessian::content_t content = call("argInt_0", hessian::make_list(object));
+	const hessian::content_t content = call("argInt_0", hessian::make_list(value));
 	boost::apply_visitor(content_visitor(), content);
 }
 
 void
-service_impl::test_double_0_0()
+service_impl::arg_double_0_0(const double value)
 {
-	const hessian::double_t object = 0.0;
-	const hessian::content_t content = call("argDouble_0_0", hessian::make_list(object));
+	const hessian::content_t content = call("argDouble_0_0", hessian::make_list(value));
 	boost::apply_visitor(content_visitor(), content);
 }
 
-void
-service_impl::test_object_1(const object_1& dto)
+static hessian::object_t
+transform_object_1(const object_1& dto)
 {
-	const hessian::object_t object = hessian::make_object("_value", dto.get_value());
+	return hessian::make_object
+	(
+		"_value",	dto.get_value()
+	);
+}
+
+void
+service_impl::arg_object_1(const object_1& dto)
+{
+	const hessian::object_t object = transform_object_1(dto);
 	const hessian::content_t content = call("argObject_1", hessian::make_list(object));
 	boost::apply_visitor(content_visitor(), content);
+}
+
+static object_1
+transform_object_1(const hessian::object_t& dto)
+{
+	return object_1
+	(
+		boost::get<hessian::int_t>(dto.at("_value"))
+	);
+}
+
+object_1
+service_impl::reply_object_1()
+{
+	const hessian::content_t content = call("replyObject_1", hessian::list_t());
+	boost::apply_visitor(content_visitor(), content);
+	return transform_object_1(boost::get<hessian::object_t>(boost::get<hessian::reply_t>(content)));
 }
 
 service
