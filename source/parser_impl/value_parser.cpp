@@ -19,10 +19,16 @@ value_parser::value_parser()
 :
 	value_parser::base_type(_value),
 	_value(std::string("value")),
-	_terminal(),
+	_null(),
+	_boolean(),
+	_int(),
+	_long(),
+	_double(),
+	_date(),
+	_string(),
+	_binary(),
 	_type(),
 	_def(),
-	_int(),
 	_ref(),
 	_def_value(),
 	_nonterminal(),
@@ -43,7 +49,21 @@ value_parser::value_parser()
 	_refs()
 {
 	_value =
-			_terminal
+			_null
+			|
+			_boolean
+			|
+			_int
+			|
+			_long
+			|
+			_double
+			|
+			_date
+			|
+			_string
+			|
+			_binary
 			|
 			_ref
 			|

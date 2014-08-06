@@ -9,7 +9,14 @@
 
 #include <hessian/value.hpp>
 #include "input_iterator.hpp"
-#include "terminal_parser.hpp"
+#include "null_parser.hpp"
+#include "boolean_parser.hpp"
+#include "int_parser.hpp"
+#include "long_parser.hpp"
+#include "double_parser.hpp"
+#include "date_parser.hpp"
+#include "string_parser.hpp"
+#include "binary_parser.hpp"
 #include "type_parser.hpp"
 #include "def_parser.hpp"
 #include "int_parser.hpp"
@@ -34,10 +41,16 @@ public:
 private:
 	qi::rule<input_iterator_t, value_t()> _value;
 
-	terminal_parser _terminal;
+	null_parser _null;
+	boolean_parser _boolean;
+	int_parser _int;
+	long_parser _long;
+	double_parser _double;
+	date_parser _date;
+	string_parser _string;
+	binary_parser _binary;
 	type_parser _type;
 	def_parser _def;
-	int_parser _int;
 
 	qi::rule<input_iterator_t, value_t()> _ref;
 	qi::rule<input_iterator_t, value_t()> _def_value;
