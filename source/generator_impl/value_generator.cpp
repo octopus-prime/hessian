@@ -47,29 +47,47 @@ value_generator::value_generator()
 :
 	value_generator::base_type(_value),
 	_value(),
+	_null(),
+	_boolean(),
 	_int(),
 	_long(),
-	_date(),
-	_boolean(),
-	_string(),
-	_null(),
 	_double(),
-	_def(),
+	_date(),
+	_string(),
 	_binary(),
-	_map(),
-	_pair(),
+	_def(),
 	_list(),
 	_list_1(),
 	_list_2(),
+	_map(),
+	_pair(),
 	_object()
 {
-	_value = _int | _long | _date | _boolean | _string | _binary | _list | _map | _null | _double | _object;
+	_value =
+			_null
+			|
+			_boolean
+			|
+			_int
+			|
+			_long
+			|
+			_double
+			|
+			_date
+			|
+			_string
+			|
+			_binary
+			|
+			_list
+			|
+			_map
+			|
+			_object
+	;
 
-	_map = ka::lit('H') << *_pair << ka::lit('Z');
-
-	_pair = _value << _value;
-
-	_list = ka::eps [ka::_a = px::bind(&list_t::size, ka::_val)]
+	_list = ka::eps							[ka::_a = px::bind(&list_t::size, ka::_val)]
 	        <<
 			(
 				_list_1(ka::_a)
@@ -77,13 +95,39 @@ value_generator::value_generator()
 				_list_2(ka::_a)
 			)
 			<<
-			(*_value) [ka::_1 = ka::_val];
+			(*_value)						[ka::_1 = ka::_val];
 
-	_list_1 = ka::eps (ka::_r1 >= 0x00 && ka::_r1 <= 0x07) << ka::byte_ [ka::_1 = ka::_r1 + 0x78];
+	_list_1 =
+			ka::eps (ka::_r1 >= 0x00 && ka::_r1 <= 0x07)
+			<<
+			ka::byte_						[ka::_1 = ka::_r1 + 0x78];
 
-	_list_2 = ka::lit('X') << _int [ka::_1 = ka::_r1];
+	_list_2 =
+			ka::lit('X')
+			<<
+			_int							[ka::_1 = ka::_r1]
+	;
 
-	_object = _def [ka::_1 = px::bind(get_keys, ka::_val)] << ka::lit('\x60') << (*_value) [ka::_1 = px::bind(get_values, ka::_val)];
+	_map =
+			ka::lit('H')
+			<<
+			*_pair
+			<<
+			ka::lit('Z')
+	;
+
+	_pair =
+			_value
+			<<
+			_value
+	;
+
+	_object =
+			_def							[ka::_1 = px::bind(get_keys, ka::_val)]
+			<<
+			ka::lit('\x60')
+			<<
+			(*_value)						[ka::_1 = px::bind(get_values, ka::_val)];
 }
 
 }
