@@ -43,6 +43,7 @@ value_parser::value_parser()
 	_map_1(),
 	_map_2(),
 	_object(),
+	_index(),
 	_index_1(),
 	_index_2(),
 	_defs(),
