@@ -19,6 +19,7 @@
 #include "binary_generator.hpp"
 #include "def_generator.hpp"
 #include <boost/spirit/include/karma_grammar.hpp>
+#include <boost/optional.hpp>
 
 namespace ka = boost::spirit::karma;
 
@@ -29,8 +30,15 @@ class value_generator
 :
 	public ka::grammar<output_iterator_t, value_t()>
 {
+	typedef std::vector<string_t> def_t;
+	typedef std::vector<def_t> defs_t;
+	typedef std::pair<boost::optional<def_t>, std::size_t> magic_t;
+
 public:
 	value_generator();
+
+protected:
+	magic_t def(const object_t& object);
 
 private:
 	// Top rule
@@ -53,7 +61,12 @@ private:
 	ka::rule<output_iterator_t, list_t(std::size_t)> _list_2;
 	ka::rule<output_iterator_t, map_t()> _map;
 	ka::rule<output_iterator_t, map_t::value_type()> _pair;
-	ka::rule<output_iterator_t, object_t()> _object;
+	ka::rule<output_iterator_t, object_t(), ka::locals<magic_t > > _object;
+	ka::rule<output_iterator_t, std::size_t()> _index;
+	ka::rule<output_iterator_t, std::size_t()> _index_1;
+	ka::rule<output_iterator_t, std::size_t()> _index_2;
+
+	defs_t _defs;
 };
 
 }

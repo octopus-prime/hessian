@@ -61,7 +61,11 @@ value_generator::value_generator()
 	_list_2(),
 	_map(),
 	_pair(),
-	_object()
+	_object(),
+	_index(),
+	_index_1(),
+	_index_2(),
+	_defs()
 {
 	_value =
 			_null
@@ -122,12 +126,52 @@ value_generator::value_generator()
 			_value
 	;
 
+	/*
+	 * Idee: def a = get keys, pair<size,optional<def>> b = find_def, << pair.second << index << pair.first << get_values
+	 */
+
 	_object =
-			_def							[ka::_1 = px::bind(get_keys, ka::_val)]
+			ka::eps							[ka::_a = px::bind(&value_generator::def, this, ka::_val)]
 			<<
-			ka::lit('\x60')
+			(-_def)							[ka::_1 = px::bind(&value_generator::magic_t::first, ka::_a)]
+			<<
+//			ka::lit('\x60')
+			_index							[ka::_1 = px::bind(&value_generator::magic_t::second, ka::_a)]
 			<<
 			(*_value)						[ka::_1 = px::bind(get_values, ka::_val)];
+
+	_index =
+			_index_1
+			|
+			_index_2
+	;
+
+	_index_1 =
+			ka::eps (ka::_val >= 0x00 && ka::_val <= 0x0f)
+			<<
+			ka::byte_						[ka::_1 = ka::_val + 0x60];
+	;
+
+	_index_2 =
+			ka::lit('O')
+			<<
+			_int
+	;
+}
+
+value_generator::magic_t
+value_generator::def(const object_t& object)
+{
+	const def_t def = get_keys(object);
+	const defs_t::const_iterator found = std::find
+	(
+		_defs.begin(), _defs.end(),
+		def
+	);
+	if (found != _defs.end())
+		return std::make_pair(boost::none_t(), found - _defs.begin());
+	_defs.push_back(def);
+	return std::make_pair(def, _defs.size() - 1);
 }
 
 }
