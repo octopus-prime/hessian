@@ -56,16 +56,21 @@ value_generator::value_generator()
 	_string(),
 	_binary(),
 	_def(),
+	_list_or_ref(),
 	_list(),
 	_list_1(),
 	_list_2(),
+	_map_or_ref(),
 	_map(),
 	_pair(),
+	_object_or_ref(),
 	_object(),
 	_index(),
 	_index_1(),
 	_index_2(),
-	_defs()
+	_ref(),
+	_defs(),
+	_refs()
 {
 	_value =
 			_null
@@ -84,11 +89,17 @@ value_generator::value_generator()
 			|
 			_binary
 			|
+			_list_or_ref
+			|
+			_map_or_ref
+			|
+			_object_or_ref
+	;
+
+	_list_or_ref =
+			_ref							[ka::_1 = px::construct<value_t>(ka::_val)]
+			|
 			_list
-			|
-			_map
-			|
-			_object
 	;
 
 	_list = ka::eps							[ka::_a = px::bind(&list_t::size, ka::_val)]
@@ -112,6 +123,12 @@ value_generator::value_generator()
 			_int							[ka::_1 = ka::_r1]
 	;
 
+	_map_or_ref =
+			_ref							[ka::_1 = px::construct<value_t>(ka::_val)]
+			|
+			_map
+	;
+
 	_map =
 			ka::lit('H')
 			<<
@@ -126,19 +143,23 @@ value_generator::value_generator()
 			_value
 	;
 
-	/*
-	 * Idee: def a = get keys, pair<size,optional<def>> b = find_def, << pair.second << index << pair.first << get_values
-	 */
+	_object_or_ref =
+			_ref							[ka::_1 = px::construct<value_t>(ka::_val)]
+			|
+			_object
+	;
 
 	_object =
+			(
 			ka::eps							[ka::_a = px::bind(&value_generator::def, this, ka::_val)]
 			<<
-			(-_def)							[ka::_1 = px::bind(&value_generator::magic_t::first, ka::_a)]
+			(-_def)							[ka::_1 = px::bind(&value_generator::def_index_t::first, ka::_a)]
 			<<
-//			ka::lit('\x60')
-			_index							[ka::_1 = px::bind(&value_generator::magic_t::second, ka::_a)]
+			_index							[ka::_1 = px::bind(&value_generator::def_index_t::second, ka::_a)]
 			<<
-			(*_value)						[ka::_1 = px::bind(get_values, ka::_val)];
+			(*_value)						[ka::_1 = px::bind(get_values, ka::_val)]
+			)
+	;
 
 	_index =
 			_index_1
@@ -157,21 +178,50 @@ value_generator::value_generator()
 			<<
 			_int
 	;
+
+	_ref =
+			ka::eps							[ka::_a = px::bind(&value_generator::ref, this, ka::_val)]
+			<<
+			ka::eps (!px::bind(&value_generator::ref_index_t::first, ka::_a))	// no emplace => was emplaced before => use ref
+			<<
+			ka::lit('Q')
+			<<
+			_int							[ka::_1 = px::bind(&value_generator::ref_index_t::second, ka::_a)]
+	;
 }
 
-value_generator::magic_t
+value_generator::def_index_t
 value_generator::def(const object_t& object)
 {
-	const def_t def = get_keys(object);
-	const defs_t::const_iterator found = std::find
+	const std::pair<defs_t::const_iterator, bool> emplaced = _defs.emplace
 	(
-		_defs.begin(), _defs.end(),
-		def
+		get_keys(object),
+		_defs.size()
 	);
-	if (found != _defs.end())
-		return std::make_pair(boost::none_t(), found - _defs.begin());
-	_defs.push_back(def);
-	return std::make_pair(def, _defs.size() - 1);
+	return std::make_pair
+	(
+		boost::make_optional
+		(
+			emplaced.second,
+			boost::cref(emplaced.first->first)
+		),
+		emplaced.first->second
+	);
+}
+
+value_generator::ref_index_t
+value_generator::ref(const value_t& value)
+{
+	const std::pair<refs_t::const_iterator, bool> emplaced = _refs.emplace
+	(
+		value,
+		_refs.size()
+	);
+	return std::make_pair
+	(
+		emplaced.second,
+		emplaced.first->second
+	);
 }
 
 }
