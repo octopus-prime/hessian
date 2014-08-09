@@ -7,7 +7,7 @@
 
 #include "output_visitor.hpp"
 #include <boost/date_time/posix_time/time_formatters_limited.hpp>
-#include <boost/algorithm/hex.hpp>
+#include <iomanip>
 
 namespace hessian {
 namespace value_impl {
@@ -64,7 +64,9 @@ output_visitor::operator()(const string_t& value)
 output_visitor::result_type
 output_visitor::operator()(const binary_t& value)
 {
-	_stream << "binary('" << boost::algorithm::hex(value) << "')";
+	_stream << "binary('" << std::hex << std::setfill('0') << std::setw(2);
+	std::copy(value.begin(), value.end(), std::ostream_iterator<boost::int16_t>(_stream));
+	_stream << "')";
 }
 
 output_visitor::result_type
