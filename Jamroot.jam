@@ -2,7 +2,7 @@ using testing ;
 
 project hessian
 	:
-		usage-requirements
+		requirements
 		<include>include
 	;
 
@@ -17,7 +17,6 @@ lib hessian
 	:
 #		<cxxflags>--coverage
 #		<linkflags>--coverage
-		<include>include
 		<define>BOOST_SPIRIT_USE_PHOENIX_V3
 	;
 
@@ -28,7 +27,6 @@ exe hessian_example
 		/site-config//PocoFoundation
 		/site-config//PocoNet
 	:
-		<include>include
 	;
 
 unit-test hessian_test
@@ -41,9 +39,5 @@ unit-test hessian_test
 		hessian
 		/site-config//boost_unit_test_framework
 	:
-#		<cxxflags>--coverage
-#		<linkflags>--coverage
-		<include>include
-		<define>BOOST_SPIRIT_USE_PHOENIX_V3
 		<define>BOOST_TEST_DYN_LINK
 	;
