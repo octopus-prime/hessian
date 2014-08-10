@@ -24,6 +24,8 @@ fault_parser::fault_parser()
 	_fault =
 			qi::lit('F')
 			>
+			qi::lit('H')
+			>
 			*(
 				(_value - qi::lit('Z'))
 				>
