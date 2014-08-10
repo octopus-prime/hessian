@@ -8,6 +8,7 @@
 #pragma once
 
 #include <string>
+#include <exception>
 #include <boost/cstdint.hpp>
 #include <boost/shared_ptr.hpp>
 
@@ -23,6 +24,14 @@ private:
 	boost::int32_t _value;
 };
 
+class exception
+:
+	public std::exception
+{
+protected:
+	virtual ~exception() BOOST_NOEXCEPT_OR_NOTHROW {}
+};
+
 class service_base
 {
 protected:
@@ -33,6 +42,7 @@ public:
 	virtual void arg_double_0_0(const double value) = 0;
 	virtual void arg_object_1(const object_1& dto) = 0;
 	virtual object_1 reply_object_1() = 0;
+	virtual void fault() = 0;
 };
 
 typedef boost::shared_ptr<service_base> service;

@@ -20,10 +20,11 @@ main()
 		service->arg_object_1(client::object_1(0));
 		const client::object_1 object_1 = service->reply_object_1();
 		std::cout << object_1.get_value() << std::endl;
+		service->fault();
 	}
 	catch (const std::exception& exception)
 	{
-		std::cout << "std error: "<< exception.what() << std::endl;
+		std::cerr << "error: " << exception.what() << std::endl;
 	}
 	return 0;
 }

@@ -14,8 +14,50 @@
 #include <Poco/Net/HTTPResponse.h>
 
 #include <boost/make_shared.hpp>
+#include <boost/format.hpp>
 
 namespace client {
+
+class fault_exception
+:
+	public virtual exception
+{
+public:
+	fault_exception(const hessian::fault_t& fault);
+	virtual ~fault_exception() BOOST_NOEXCEPT_OR_NOTHROW {}
+	virtual const char* what() const BOOST_NOEXCEPT_OR_NOTHROW;
+
+protected:
+	static std::string build(const hessian::fault_t& fault);
+
+private:
+	std::string _what;
+};
+
+fault_exception::fault_exception(const hessian::fault_t& fault)
+:
+	exception(),
+	_what(build(fault))
+{
+}
+
+const char*
+fault_exception::what() const BOOST_NOEXCEPT_OR_NOTHROW
+{
+	return _what.c_str();
+}
+
+std::string
+fault_exception::build(const hessian::fault_t& fault)
+{
+	static const hessian::string_t CODE("code");
+	static const hessian::string_t MESSAGE("message");
+
+	boost::format what("code = '%s', message = '%s'");
+	what % boost::get<hessian::string_t>(fault.at(CODE));
+	what % boost::get<hessian::string_t>(fault.at(MESSAGE));
+	return what.str();
+}
 
 object_1::object_1(const boost::int32_t value)
 :
@@ -47,7 +89,7 @@ content_visitor::operator()(const hessian::reply_t& content) const
 content_visitor::result_type
 content_visitor::operator()(const hessian::fault_t& content) const
 {
-	std::cout << "fault = " << content << std::endl;
+	throw fault_exception(content);
 }
 
 class abstract_service_impl
@@ -100,6 +142,7 @@ public:
 	virtual void arg_double_0_0(const double value);
 	virtual void arg_object_1(const object_1& dto);
 	virtual object_1 reply_object_1();
+	virtual void fault();
 };
 
 service_impl::service_impl(const std::string& host, const boost::uint16_t port)
@@ -155,6 +198,13 @@ service_impl::reply_object_1()
 	const hessian::content_t content = call("replyObject_1", hessian::list_t());
 	boost::apply_visitor(content_visitor(), content);
 	return transform_object_1(boost::get<hessian::object_t>(boost::get<hessian::reply_t>(content)));
+}
+
+void
+service_impl::fault()
+{
+	const hessian::content_t content = call("replyFoo", hessian::list_t());
+	boost::apply_visitor(content_visitor(), content);
 }
 
 service
