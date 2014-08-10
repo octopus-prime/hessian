@@ -18,7 +18,7 @@ namespace parser_impl {
 value_parser::value_parser()
 :
 	value_parser::base_type(_value),
-	_value(std::string("value")),
+	_value(),
 	_null(),
 	_boolean(),
 	_int(),
@@ -89,7 +89,7 @@ value_parser::value_parser()
 	;
 
 	_nonterminal =
-			qi::eps						[qi::_a = px::bind(&std::vector<value_t>::size, px::ref(_refs)), px::push_back(px::ref(_refs), px::construct<value_t>())]
+			qi::eps							[qi::_a = px::bind(&std::vector<value_t>::size, px::ref(_refs)), px::push_back(px::ref(_refs), px::construct<value_t>())]
 			>>
 			(
 				_list
@@ -97,9 +97,9 @@ value_parser::value_parser()
 				_map
 				|
 				_object
-			)									[px::at(px::ref(_refs), qi::_a) = qi::_1, qi::_val = qi::_1]
+			)								[px::at(px::ref(_refs), qi::_a) = qi::_1, qi::_val = qi::_1]
 			|
-			qi::eps 					[px::erase(px::ref(_refs), px::bind<refs_t::iterator>(&refs_t::begin, px::ref(_refs)) + qi::_a), qi::_pass = false]
+			qi::eps 						[px::erase(px::ref(_refs), px::bind<refs_t::iterator>(&refs_t::begin, px::ref(_refs)) + qi::_a), qi::_pass = false]
 	;
 
 	_list =

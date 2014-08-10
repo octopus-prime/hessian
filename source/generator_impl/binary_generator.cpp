@@ -49,11 +49,11 @@ binary_generator::binary_generator()
 			_length_4
 //			TODO: Does not compile, so we use bad workaround here.
 //			<<
-//			ka::string [ka::_1 = px::bind(&binary_t::substr, ka::_val, 0, 0xffff)]
+//			ka::string 						[ka::_1 = px::bind(&binary_t::substr, ka::_val, 0, 0xffff)]
 			<<
-			ka::string [ka::_1 = px::bind(workaround_for_string_issue, ka::_val)]
+			ka::string 						[ka::_1 = px::bind(workaround_for_string_issue, ka::_val)]
 			<<
-			_binary [ka::_1 = px::bind(&binary_t::substr, ka::_val, 0xffff, binary_t::npos)]
+			_binary 						[ka::_1 = px::bind(&binary_t::substr, ka::_val, 0xffff, binary_t::npos)]
 	;
 
 	_length =
@@ -67,15 +67,15 @@ binary_generator::binary_generator()
 	_length_1 =
 			ka::eps (ka::_r1 >= 0x00 && ka::_r1 <= 0x0f)
 			<<
-			ka::byte_ [ka::_1 = ka::_r1 + 0x20]
+			ka::byte_ 						[ka::_1 = ka::_r1 + 0x20]
 	;
 
 	_length_2 =
 			ka::eps (ka::_r1 >= 0x10 && ka::_r1 <= 0x3ff)
 			<<
-			ka::byte_ [ka::_1 = (ka::_r1 >> 8) + 0x34]
+			ka::byte_ 						[ka::_1 = (ka::_r1 >> 8) + 0x34]
 			<<
-			ka::byte_ [ka::_1 = ka::_r1 & 0xff]
+			ka::byte_ 						[ka::_1 = ka::_r1 & 0xff]
 	;
 
 	_length_3 =
@@ -83,13 +83,13 @@ binary_generator::binary_generator()
 			<<
 			ka::lit('B')
 			<<
-			ka::big_word [ka::_1 = ka::_r1]
+			ka::big_word 					[ka::_1 = ka::_r1]
 	;
 
 	_length_4 =
 			ka::lit('A')
 			<<
-			ka::big_word [ka::_1 = 0xffff]
+			ka::big_word 					[ka::_1 = 0xffff]
 	;
 }
 

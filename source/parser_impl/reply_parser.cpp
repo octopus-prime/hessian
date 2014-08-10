@@ -17,7 +17,7 @@ namespace parser_impl {
 reply_parser::reply_parser()
 :
 	reply_parser::base_type(_reply),
-	_reply(std::string("'R'")),
+	_reply(),
 	_value()
 {
 	_reply =

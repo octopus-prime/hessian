@@ -15,7 +15,7 @@ namespace parser_impl {
 version_parser::version_parser()
 :
 	version_parser::base_type(_version),
-	_version(std::string("version"))
+	_version()
 {
 	_version =
 			qi::lit(constant::VERSION)

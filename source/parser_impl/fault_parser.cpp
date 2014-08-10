@@ -18,20 +18,18 @@ namespace parser_impl {
 fault_parser::fault_parser()
 :
 	fault_parser::base_type(_fault),
-	_fault(std::string("'F'")),
+	_fault(),
 	_value()
 {
 	_fault =
-			qi::lit('F')
-			>
-			qi::lit('H')
-			>
+			qi::lit("FH")
+			>>
 			*(
 				(_value - qi::lit('Z'))
-				>
+				>>
 				_value
 			)
-			>
+			>>
 			qi::lit('Z')
 	;
 }

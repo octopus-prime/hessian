@@ -24,9 +24,9 @@ date_generator::date_generator()
 	_date_2()
 {
 	_date =
-			ka::eps [ka::_a = ka::_val - constant::EPOCH]
+			ka::eps 						[ka::_a = ka::_val - constant::EPOCH]
 			<<
-			ka::eps [ka::_b = px::bind(&pt::time_duration::total_milliseconds, ka::_a)]
+			ka::eps 						[ka::_b = px::bind(&pt::time_duration::total_milliseconds, ka::_a)]
 			<<
 			(
 				_date_1(ka::_b)
@@ -40,13 +40,13 @@ date_generator::date_generator()
 			<<
 			ka::lit('\x4b')
 			<<
-			ka::big_dword	[ka::_1 = ka::_r1 / 60000]
+			ka::big_dword					[ka::_1 = ka::_r1 / 60000]
 	;
 
 	_date_2 =
 			ka::lit('\x4a')
 			<<
-			ka::big_qword	[ka::_1 = ka::_r1]
+			ka::big_qword					[ka::_1 = ka::_r1]
 	;
 }
 

@@ -25,11 +25,11 @@ def_generator::def_generator()
 	_def =
 			ka::lit('C')
 			<<
-			_string [ka::_1 = px::construct<std::string>()]
+			_string 						[ka::_1 = px::construct<std::string>()]
 			<<
-			_int [ka::_1 = px::bind(&std::vector<std::string>::size, ka::_val)]
+			_int 							[ka::_1 = px::bind(&std::vector<std::string>::size, ka::_val)]
 			<<
-			(*_string) [ka::_1 = ka::_val];
+			(*_string) 						[ka::_1 = ka::_val];
 }
 
 }
