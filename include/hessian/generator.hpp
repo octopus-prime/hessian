@@ -40,6 +40,7 @@ public:
 	 * Generates content into stream.
 	 * @param method The method.
 	 * @param arguments The arguments.
+	 * @throws generator_exception Failure while generating.
 	 */
 	void operator()(const string_t& method, const list_t& arguments);
 

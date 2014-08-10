@@ -11,3 +11,11 @@
 #include <hessian/exception.hpp>
 #include <hessian/generator.hpp>
 #include <hessian/parser.hpp>
+
+/**
+ * hessian
+ */
+namespace hessian {}
+/**
+ * @example client.cpp
+ */

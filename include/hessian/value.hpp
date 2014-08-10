@@ -18,9 +18,6 @@
 #include <boost/variant.hpp>
 #include <boost/assign/list_of.hpp>
 
-/**
- * hessian
- */
 namespace hessian {
 
 struct less;
