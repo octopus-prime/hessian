@@ -76,7 +76,6 @@ BOOST_AUTO_TEST_CASE(test_hash)\
 {\
 	const value_t v1 = value1;\
 	const value_t v2 = value2;\
-	BOOST_CHECK_EQUAL(hash()(v1), hash()(v1));\
 	BOOST_CHECK_NE(hash()(v1), hash()(v2));\
 }
 
