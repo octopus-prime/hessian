@@ -12,7 +12,6 @@
 #include "parser_impl/fault_parser.hpp"
 #include <boost/spirit/include/qi.hpp>
 #include <boost/format.hpp>
-#include <stdexcept>
 
 namespace qi = boost::spirit::qi;
 
