@@ -15,6 +15,12 @@ namespace px = boost::phoenix;
 namespace hessian {
 namespace parser_impl {
 
+static const map_t&
+to_map(const value_t& value)
+{
+	return boost::get<map_t>(value);
+}
+
 fault_parser::fault_parser()
 :
 	fault_parser::base_type(_fault),
@@ -22,15 +28,9 @@ fault_parser::fault_parser()
 	_value()
 {
 	_fault =
-			qi::lit("FH")
+			qi::lit("F")
 			>>
-			*(
-				(_value - qi::lit('Z'))
-				>>
-				_value
-			)
-			>>
-			qi::lit('Z')
+			_value 										[qi::_val = px::bind(to_map, qi::_1)];
 	;
 }
 
