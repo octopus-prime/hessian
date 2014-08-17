@@ -22,6 +22,7 @@ struct fixture_string
 	static const string_t string_1024;
 	static const string_t string_65535;
 	static const string_t string_65536;
+	static const string_t string_unicode;
 
 	static const string_t hessian_0;
 	static const string_t hessian_1;
@@ -31,6 +32,7 @@ struct fixture_string
 	static const string_t hessian_1024;
 	static const string_t hessian_65535;
 	static const string_t hessian_65536;
+	static const string_t hessian_unicode;
 };
 
 }
