@@ -83,7 +83,7 @@ BOOST_AUTO_TEST_CASE(test_hash)\
 BOOST_AUTO_TEST_CASE(test_output)\
 {\
 	const value_t v = value;\
-	BOOST_CHECK_EQUAL(boost::lexical_cast<std::string>(v), output);\
+	BOOST_CHECK(boost::lexical_cast<std::wstring>(v) == output);\
 }
 
 }

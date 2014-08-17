@@ -33,24 +33,24 @@ struct fixture_long
 	static const long_t long_0x80000000;
 	static const long_t long_m0x80000001;
 
-	static const string_t hessian_0;
-	static const string_t hessian_1;
-	static const string_t hessian_15;
-	static const string_t hessian_m8;
-	static const string_t hessian_0x10;
-	static const string_t hessian_0x7ff;
-	static const string_t hessian_m9;
-	static const string_t hessian_m0x800;
-	static const string_t hessian_0x800;
-	static const string_t hessian_m0x801;
-	static const string_t hessian_0x3ffff;
-	static const string_t hessian_m0x40000;
-	static const string_t hessian_0x40000;
-	static const string_t hessian_m0x40001;
-	static const string_t hessian_0x7fffffff;
-	static const string_t hessian_m0x80000000;
-	static const string_t hessian_0x80000000;
-	static const string_t hessian_m0x80000001;
+	static const std::string hessian_0;
+	static const std::string hessian_1;
+	static const std::string hessian_15;
+	static const std::string hessian_m8;
+	static const std::string hessian_0x10;
+	static const std::string hessian_0x7ff;
+	static const std::string hessian_m9;
+	static const std::string hessian_m0x800;
+	static const std::string hessian_0x800;
+	static const std::string hessian_m0x801;
+	static const std::string hessian_0x3ffff;
+	static const std::string hessian_m0x40000;
+	static const std::string hessian_0x40000;
+	static const std::string hessian_m0x40001;
+	static const std::string hessian_0x7fffffff;
+	static const std::string hessian_m0x80000000;
+	static const std::string hessian_0x80000000;
+	static const std::string hessian_m0x80000001;
 };
 
 }

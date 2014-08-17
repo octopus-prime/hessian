@@ -14,7 +14,7 @@ namespace hessian {
 namespace parser_test {
 
 reply_t
-parse_reply(const string_t& reply);
+parse_reply(const std::string& reply);
 
 #define TEST_REPLY(test_name, reply_value, expected_value) \
 BOOST_AUTO_TEST_CASE(test_name)\
@@ -30,7 +30,7 @@ BOOST_AUTO_TEST_CASE(test_name)\
 }
 
 fault_t
-parse_fault(const string_t& fault);
+parse_fault(const std::string& fault);
 
 #define TEST_FAULT(test_name, fault_value, expected_value) \
 BOOST_AUTO_TEST_CASE(test_name)\

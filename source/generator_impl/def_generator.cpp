@@ -19,15 +19,14 @@ def_generator::def_generator()
 	def_generator::base_type(_def),
 	_def(),
 	_int(),
-	_string(),
-	_null()
+	_string()
 {
 	_def =
 			ka::lit('C')
 			<<
-			_string 						[ka::_1 = px::construct<std::string>()]
+			_string 						[ka::_1 = px::construct<string_t>()]
 			<<
-			_int 							[ka::_1 = px::bind(&std::vector<std::string>::size, ka::_val)]
+			_int 							[ka::_1 = px::bind(&std::vector<string_t>::size, ka::_val)]
 			<<
 			(*_string) 						[ka::_1 = ka::_val];
 }

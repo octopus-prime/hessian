@@ -17,8 +17,8 @@ struct fixture_fault
 	static const fault_t fault_0;
 	static const fault_t fault_1;
 
-	static const string_t hessian_0;
-	static const string_t hessian_1;
+	static const std::string hessian_0;
+	static const std::string hessian_1;
 };
 
 }

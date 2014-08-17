@@ -16,7 +16,7 @@ struct fixture_null
 {
 	static const null_t null;
 
-	static const string_t hessian;
+	static const std::string hessian;
 };
 
 }

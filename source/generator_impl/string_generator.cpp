@@ -14,6 +14,13 @@ namespace px = boost::phoenix;
 namespace hessian {
 namespace generator_impl {
 
+static std::string
+workaround_for_string_issue(const string_t& string)
+{
+	const string_t substr = string.substr(0, 0xffff);
+	return std::string(substr.begin(), substr.end());
+}
+
 string_generator::string_generator()
 :
 	string_generator::base_type(_string),
@@ -41,7 +48,8 @@ string_generator::string_generator()
 	_string_2 =
 			_length_4
 			<<
-			ka::string [ka::_1 = px::bind(&string_t::substr, ka::_val, 0, 0xffff)]
+//			ka::string [ka::_1 = px::bind(&string_t::substr, ka::_val, 0, 0xffff)]
+			ka::string [ka::_1 = px::bind(workaround_for_string_issue, ka::_val)]
 			<<
 			_string [ka::_1 = px::bind(&string_t::substr, ka::_val, 0xffff, string_t::npos)]
 	;

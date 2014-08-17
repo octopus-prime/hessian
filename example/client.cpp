@@ -50,13 +50,14 @@ fault_exception::what() const BOOST_NOEXCEPT_OR_NOTHROW
 std::string
 fault_exception::build(const hessian::fault_t& fault)
 {
-	static const hessian::string_t CODE("code");
-	static const hessian::string_t MESSAGE("message");
+	static const hessian::string_t CODE(L"code");
+	static const hessian::string_t MESSAGE(L"message");
 
-	boost::format what("code = '%s', message = '%s'");
-	what % boost::get<hessian::string_t>(fault.at(CODE));
-	what % boost::get<hessian::string_t>(fault.at(MESSAGE));
-	return what.str();
+	boost::wformat format(L"code = '%s', message = '%s'");
+	format % boost::get<hessian::string_t>(fault.at(CODE));
+	format % boost::get<hessian::string_t>(fault.at(MESSAGE));
+	const hessian::string_t what = format.str();
+	return std::string(what.begin(), what.end());
 }
 
 object_1::object_1(const boost::int32_t value)
@@ -83,7 +84,7 @@ public:
 content_visitor::result_type
 content_visitor::operator()(const hessian::reply_t& content) const
 {
-	std::cout << "reply = " << content << std::endl;
+	std::wcout << "reply = " << content << std::endl;
 }
 
 content_visitor::result_type
@@ -97,7 +98,7 @@ class abstract_service_impl
 protected:
 	abstract_service_impl(const std::string& host, const boost::uint16_t port, const std::string& path);
 	virtual ~abstract_service_impl() BOOST_NOEXCEPT_OR_NOTHROW {}
-	hessian::content_t call(const std::string& method, const hessian::list_t& arguments);
+	hessian::content_t call(const hessian::string_t& method, const hessian::list_t& arguments);
 
 private:
 	Poco::Net::HTTPClientSession _session;
@@ -112,7 +113,7 @@ abstract_service_impl::abstract_service_impl(const std::string& host, const boos
 }
 
 hessian::content_t
-abstract_service_impl::call(const std::string& method, const hessian::list_t& arguments)
+abstract_service_impl::call(const hessian::string_t& method, const hessian::list_t& arguments)
 {
 	Poco::Net::HTTPRequest request(Poco::Net::HTTPRequest::HTTP_POST, _path, Poco::Net::HTTPMessage::HTTP_1_1);
 	request.setChunkedTransferEncoding(true);
@@ -155,14 +156,14 @@ service_impl::service_impl(const std::string& host, const boost::uint16_t port)
 void
 service_impl::arg_int_0(const boost::int32_t value)
 {
-	const hessian::content_t content = call("argInt_0", hessian::make_list(value));
+	const hessian::content_t content = call(L"argInt_0", hessian::make_list(value));
 	boost::apply_visitor(content_visitor(), content);
 }
 
 void
 service_impl::arg_double_0_0(const double value)
 {
-	const hessian::content_t content = call("argDouble_0_0", hessian::make_list(value));
+	const hessian::content_t content = call(L"argDouble_0_0", hessian::make_list(value));
 	boost::apply_visitor(content_visitor(), content);
 }
 
@@ -171,7 +172,7 @@ transform_object_1(const object_1& dto)
 {
 	return hessian::make_object
 	(
-		"_value",	dto.get_value()
+		L"_value",	dto.get_value()
 	);
 }
 
@@ -179,7 +180,7 @@ void
 service_impl::arg_object_1(const object_1& dto)
 {
 	const hessian::object_t object = transform_object_1(dto);
-	const hessian::content_t content = call("argObject_1", hessian::make_list(object));
+	const hessian::content_t content = call(L"argObject_1", hessian::make_list(object));
 	boost::apply_visitor(content_visitor(), content);
 }
 
@@ -188,14 +189,14 @@ transform_object_1(const hessian::object_t& dto)
 {
 	return object_1
 	(
-		boost::get<hessian::int_t>(dto.at("_value"))
+		boost::get<hessian::int_t>(dto.at(L"_value"))
 	);
 }
 
 object_1
 service_impl::reply_object_1()
 {
-	const hessian::content_t content = call("replyObject_1", hessian::list_t());
+	const hessian::content_t content = call(L"replyObject_1", hessian::list_t());
 	boost::apply_visitor(content_visitor(), content);
 	return transform_object_1(boost::get<hessian::object_t>(boost::get<hessian::reply_t>(content)));
 }
@@ -203,7 +204,7 @@ service_impl::reply_object_1()
 void
 service_impl::fault()
 {
-	const hessian::content_t content = call("replyFoo", hessian::list_t());
+	const hessian::content_t content = call(L"replyFoo", hessian::list_t());
 	boost::apply_visitor(content_visitor(), content);
 }
 

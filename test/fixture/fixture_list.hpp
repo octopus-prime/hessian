@@ -19,15 +19,15 @@ struct fixture_list
 	static const list_t list_7;
 	static const list_t list_8;
 
-	static const string_t hessian_u_0;
-	static const string_t hessian_u_1;
-	static const string_t hessian_u_7;
-	static const string_t hessian_u_8;
+	static const std::string hessian_u_0;
+	static const std::string hessian_u_1;
+	static const std::string hessian_u_7;
+	static const std::string hessian_u_8;
 
-	static const string_t hessian_t_0;
-	static const string_t hessian_t_1;
-	static const string_t hessian_t_7;
-	static const string_t hessian_t_8;
+	static const std::string hessian_t_0;
+	static const std::string hessian_t_1;
+	static const std::string hessian_t_7;
+	static const std::string hessian_t_8;
 };
 
 }

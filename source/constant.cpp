@@ -10,6 +10,6 @@
 namespace hessian {
 
 const date_t constant::EPOCH(boost::gregorian::date(1970, 1, 1));
-const string_t constant::VERSION("H\x02\x00", 3);
+const std::string constant::VERSION("H\x02\x00", 3);
 
 }

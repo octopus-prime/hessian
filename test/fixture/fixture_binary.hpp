@@ -23,14 +23,14 @@ struct fixture_binary
 	static const binary_t binary_65535;
 	static const binary_t binary_65536;
 
-	static const string_t hessian_0;
-	static const string_t hessian_1;
-	static const string_t hessian_15;
-	static const string_t hessian_16;
-	static const string_t hessian_1023;
-	static const string_t hessian_1024;
-	static const string_t hessian_65535;
-	static const string_t hessian_65536;
+	static const std::string hessian_0;
+	static const std::string hessian_1;
+	static const std::string hessian_15;
+	static const std::string hessian_16;
+	static const std::string hessian_1023;
+	static const std::string hessian_1024;
+	static const std::string hessian_65535;
+	static const std::string hessian_65536;
 };
 
 }

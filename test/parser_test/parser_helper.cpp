@@ -12,7 +12,7 @@ namespace hessian {
 namespace parser_test {
 
 reply_t
-parse_reply(const string_t& reply)
+parse_reply(const std::string& reply)
 {
 	std::istringstream stream(constant::VERSION + "R" + reply);
 	parser parse(stream);
@@ -21,7 +21,7 @@ parse_reply(const string_t& reply)
 }
 
 fault_t
-parse_fault(const string_t& fault)
+parse_fault(const std::string& fault)
 {
 	std::istringstream stream(constant::VERSION + "F" + fault);
 	parser parse(stream);

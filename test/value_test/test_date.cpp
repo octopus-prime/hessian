@@ -20,7 +20,7 @@ TEST_EQUAL_OTHER_TYPES(date_t, other_types);
 TEST_LESS_SAME_TYPE(date_0, date_1);
 TEST_LESS_OTHER_TYPES(date_t, other_types);
 TEST_HASH(date_0, date_1);
-TEST_OUTPUT(date_1, "date(1998-05-08T09:51:31)");
+TEST_OUTPUT(date_1, L"date(1998-05-08T09:51:31)");
 
 BOOST_AUTO_TEST_SUITE_END()
 

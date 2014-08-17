@@ -20,7 +20,7 @@ TEST_EQUAL_OTHER_TYPES(boolean_t, other_types);
 TEST_LESS_SAME_TYPE(boolean_false, boolean_true);
 TEST_LESS_OTHER_TYPES(boolean_t, other_types);
 TEST_HASH(boolean_false, boolean_true);
-TEST_OUTPUT(boolean_true, "boolean(true)");
+TEST_OUTPUT(boolean_true, L"boolean(true)");
 
 BOOST_AUTO_TEST_SUITE_END()
 

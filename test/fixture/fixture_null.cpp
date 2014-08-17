@@ -12,7 +12,7 @@ namespace fixture {
 
 const null_t fixture_null::null = null_t();
 
-const string_t fixture_null::hessian = string_t("N", 1);
+const std::string fixture_null::hessian = std::string("N", 1);
 
 }
 }

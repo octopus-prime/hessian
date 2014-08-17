@@ -17,10 +17,10 @@ namespace px = boost::phoenix;
 namespace hessian {
 namespace generator_impl {
 
-static std::vector<std::string>
+static std::vector<string_t>
 get_keys(const object_t& object)
 {
-	std::vector<std::string> keys;
+	std::vector<string_t> keys;
 	boost::transform
 	(
 		object,

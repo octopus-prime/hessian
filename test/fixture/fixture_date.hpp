@@ -18,9 +18,9 @@ struct fixture_date
 	static const date_t date_1;
 	static const date_t date_2;
 
-	static const string_t hessian_0;
-	static const string_t hessian_1;
-	static const string_t hessian_2;
+	static const std::string hessian_0;
+	static const std::string hessian_1;
+	static const std::string hessian_2;
 };
 
 }

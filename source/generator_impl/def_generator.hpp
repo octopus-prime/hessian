@@ -11,7 +11,6 @@
 #include "output_iterator.hpp"
 #include "int_generator.hpp"
 #include "string_generator.hpp"
-#include "null_generator.hpp"
 #include <boost/spirit/include/karma_grammar.hpp>
 
 namespace ka = boost::spirit::karma;
@@ -33,7 +32,6 @@ private:
 	// Terminal rules
 	int_generator _int;
 	string_generator _string;
-	null_generator _null;
 };
 
 }

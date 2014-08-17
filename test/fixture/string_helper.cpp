@@ -9,7 +9,7 @@
 #include <boost/format.hpp>
 #include <boost/algorithm/string/erase.hpp>
 
-using boost::format;
+using boost::wformat;
 using boost::algorithm::erase_tail_copy;
 
 namespace hessian {
@@ -18,7 +18,7 @@ namespace fixture {
 string_t
 make_string_1024()
 {
-	format f("%02d 456789012345678901234567890123456789012345678901234567890123\n");
+	wformat f(L"%02d 456789012345678901234567890123456789012345678901234567890123\n");
 
 	string_t value;
 	for (std::size_t i = 0; i < 16; i++)
@@ -35,7 +35,7 @@ make_string_1023()
 string_t
 make_string_65536()
 {
-	format f("%03d 56789012345678901234567890123456789012345678901234567890123\n");
+	wformat f(L"%03d 56789012345678901234567890123456789012345678901234567890123\n");
 
 	string_t value;
 	for (std::size_t j = 0; j < 2; j++)

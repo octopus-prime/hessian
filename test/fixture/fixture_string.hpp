@@ -24,15 +24,15 @@ struct fixture_string
 	static const string_t string_65536;
 	static const string_t string_unicode;
 
-	static const string_t hessian_0;
-	static const string_t hessian_1;
-	static const string_t hessian_31;
-	static const string_t hessian_32;
-	static const string_t hessian_1023;
-	static const string_t hessian_1024;
-	static const string_t hessian_65535;
-	static const string_t hessian_65536;
-	static const string_t hessian_unicode;
+	static const std::string hessian_0;
+	static const std::string hessian_1;
+	static const std::string hessian_31;
+	static const std::string hessian_32;
+	static const std::string hessian_1023;
+	static const std::string hessian_1024;
+	static const std::string hessian_65535;
+	static const std::string hessian_65536;
+	static const std::string hessian_unicode;
 };
 
 }

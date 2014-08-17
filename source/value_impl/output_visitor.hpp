@@ -18,7 +18,7 @@ class output_visitor
 	public boost::static_visitor<>
 {
 public:
-	output_visitor(std::ostream& stream);
+	output_visitor(std::wostream& stream);
 	result_type operator()(const null_t& value);
 	result_type operator()(const boolean_t& value);
 	result_type operator()(const int_t& value);
@@ -32,7 +32,7 @@ public:
 	result_type operator()(const object_t& value);
 
 private:
-	std::ostream& _stream;
+	std::wostream& _stream;
 };
 
 }

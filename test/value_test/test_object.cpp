@@ -20,7 +20,7 @@ TEST_EQUAL_OTHER_TYPES(object_t, other_types);
 TEST_LESS_SAME_TYPE(object_0, object_1);
 TEST_LESS_OTHER_TYPES(object_t, other_types);
 TEST_HASH(object_0, object_1);
-TEST_OUTPUT(object_1, "object(string('_value') = int(0))");
+TEST_OUTPUT(object_1, L"object(string('_value') = int(0))");
 
 BOOST_AUTO_TEST_SUITE_END()
 

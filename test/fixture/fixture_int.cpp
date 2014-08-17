@@ -27,22 +27,22 @@ const int_t fixture_int::int_m0x40001 = int_t(-0x40001);
 const int_t fixture_int::int_0x7fffffff = int_t(0x7fffffff);
 const int_t fixture_int::int_m0x80000000 = int_t(-0x80000000);
 
-const string_t fixture_int::hessian_0 = string_t("\x90", 1);
-const string_t fixture_int::hessian_1 = string_t("\x91", 1);
-const string_t fixture_int::hessian_47 = string_t("\xbf", 1);
-const string_t fixture_int::hessian_m16 = string_t("\x80", 1);
-const string_t fixture_int::hessian_m17 = string_t("\xc7\xef", 2);
-const string_t fixture_int::hessian_0x30 = string_t("\xc8\x30", 2);
-const string_t fixture_int::hessian_0x7ff = string_t("\xcf\xff", 2);
-const string_t fixture_int::hessian_m0x800 = string_t("\xc0\x00", 2);
-const string_t fixture_int::hessian_0x800 = string_t("\xd4\x08\x00", 3);
-const string_t fixture_int::hessian_m0x801 = string_t("\xd3\xf7\xff", 3);
-const string_t fixture_int::hessian_0x3ffff = string_t("\xd7\xff\xff", 3);
-const string_t fixture_int::hessian_m0x40000 = string_t("\xd0\x00\x00", 3);
-const string_t fixture_int::hessian_0x40000 = string_t("I\x00\x04\x00\x00", 5);
-const string_t fixture_int::hessian_m0x40001 = string_t("I\xff\xfb\xff\xff", 5);
-const string_t fixture_int::hessian_0x7fffffff = string_t("I\x7f\xff\xff\xff", 5);
-const string_t fixture_int::hessian_m0x80000000 = string_t("I\x80\x00\x00\x00", 5);
+const std::string fixture_int::hessian_0 = std::string("\x90", 1);
+const std::string fixture_int::hessian_1 = std::string("\x91", 1);
+const std::string fixture_int::hessian_47 = std::string("\xbf", 1);
+const std::string fixture_int::hessian_m16 = std::string("\x80", 1);
+const std::string fixture_int::hessian_m17 = std::string("\xc7\xef", 2);
+const std::string fixture_int::hessian_0x30 = std::string("\xc8\x30", 2);
+const std::string fixture_int::hessian_0x7ff = std::string("\xcf\xff", 2);
+const std::string fixture_int::hessian_m0x800 = std::string("\xc0\x00", 2);
+const std::string fixture_int::hessian_0x800 = std::string("\xd4\x08\x00", 3);
+const std::string fixture_int::hessian_m0x801 = std::string("\xd3\xf7\xff", 3);
+const std::string fixture_int::hessian_0x3ffff = std::string("\xd7\xff\xff", 3);
+const std::string fixture_int::hessian_m0x40000 = std::string("\xd0\x00\x00", 3);
+const std::string fixture_int::hessian_0x40000 = std::string("I\x00\x04\x00\x00", 5);
+const std::string fixture_int::hessian_m0x40001 = std::string("I\xff\xfb\xff\xff", 5);
+const std::string fixture_int::hessian_0x7fffffff = std::string("I\x7f\xff\xff\xff", 5);
+const std::string fixture_int::hessian_m0x80000000 = std::string("I\x80\x00\x00\x00", 5);
 
 }
 }

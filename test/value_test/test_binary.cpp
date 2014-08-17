@@ -20,7 +20,7 @@ TEST_EQUAL_OTHER_TYPES(binary_t, other_types);
 TEST_LESS_SAME_TYPE(binary_0, binary_1);
 TEST_LESS_OTHER_TYPES(binary_t, other_types);
 TEST_HASH(binary_0, binary_1);
-TEST_OUTPUT(binary_1, "binary('30')");
+TEST_OUTPUT(binary_1, L"binary('30')");
 
 BOOST_AUTO_TEST_SUITE_END()
 

@@ -10,12 +10,12 @@
 namespace hessian {
 namespace generator_test {
 
-string_t
+std::string
 generate_call(const list_t& arguments)
 {
 	std::ostringstream stream;
 	generator generate(stream);
-	generate("method", arguments);
+	generate(L"method", arguments);
 	return stream.str();
 }
 

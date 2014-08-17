@@ -20,7 +20,7 @@ TEST_EQUAL_OTHER_TYPES(double_t, other_types);
 TEST_LESS_SAME_TYPE(double_0_0, double_1_0);
 TEST_LESS_OTHER_TYPES(double_t, other_types);
 TEST_HASH(double_0_0, double_1_0);
-TEST_OUTPUT(double_0_0, "double(0)");
+TEST_OUTPUT(double_0_0, L"double(0)");
 
 BOOST_AUTO_TEST_SUITE_END()
 

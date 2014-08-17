@@ -57,12 +57,12 @@ typedef boost::posix_time::ptime date_t;
 /**
  * Defines string type.
  */
-typedef std::string string_t;
+typedef std::wstring string_t;
 
 /**
  * Defines binary type.
  */
-typedef std::basic_string<boost::uint8_t> binary_t;
+typedef std::string binary_t;
 
 /**
  * Defines value type.
@@ -179,7 +179,7 @@ make_object(const object_t::key_type& key, const object_t::mapped_type& value);
  * @param value The value.
  * @return The stream.
  */
-std::ostream&
-operator<<(std::ostream& stream, const value_t& value);
+std::wostream&
+operator<<(std::wostream& stream, const value_t& value);
 
 }

@@ -17,8 +17,8 @@ struct fixture_boolean
 	static const boolean_t boolean_true;
 	static const boolean_t boolean_false;
 
-	static const string_t hessian_true;
-	static const string_t hessian_false;
+	static const std::string hessian_true;
+	static const std::string hessian_false;
 };
 
 }

@@ -21,12 +21,12 @@ struct fixture_object
 	static const list_t object_2b;
 	static const list_t object_16;
 
-	static const string_t hessian_0;
-	static const string_t hessian_1;
-	static const string_t hessian_2;
-	static const string_t hessian_2a;
-	static const string_t hessian_2b;
-	static const string_t hessian_16;
+	static const std::string hessian_0;
+	static const std::string hessian_1;
+	static const std::string hessian_2;
+	static const std::string hessian_2a;
+	static const std::string hessian_2b;
+	static const std::string hessian_16;
 };
 
 }

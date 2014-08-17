@@ -19,15 +19,15 @@ struct fixture_map
 	static const map_t map_2;
 	static const map_t map_3;
 
-	static const string_t hessian_u_0;
-	static const string_t hessian_u_1;
-	static const string_t hessian_u_2;
-	static const string_t hessian_u_3;
+	static const std::string hessian_u_0;
+	static const std::string hessian_u_1;
+	static const std::string hessian_u_2;
+	static const std::string hessian_u_3;
 
-	static const string_t hessian_t_0;
-	static const string_t hessian_t_1;
-	static const string_t hessian_t_2;
-	static const string_t hessian_t_3;
+	static const std::string hessian_t_0;
+	static const std::string hessian_t_1;
+	static const std::string hessian_t_2;
+	static const std::string hessian_t_3;
 };
 
 }

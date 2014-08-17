@@ -45,7 +45,7 @@ BOOST_AUTO_TEST_CASE(test_hash)
 	BOOST_CHECK_EQUAL(hash()(v1), hash()(v2));
 }
 
-TEST_OUTPUT(null, "null");
+TEST_OUTPUT(null, L"null");
 
 BOOST_AUTO_TEST_SUITE_END()
 

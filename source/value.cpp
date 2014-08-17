@@ -52,8 +52,8 @@ hash::operator()(const argument_type& value) const
 	return boost::apply_visitor(visitor, value);
 }
 
-std::ostream&
-operator<<(std::ostream& stream, const value_t& value)
+std::wostream&
+operator<<(std::wostream& stream, const value_t& value)
 {
 	value_impl::output_visitor visitor(stream);
 	boost::apply_visitor(visitor, value);

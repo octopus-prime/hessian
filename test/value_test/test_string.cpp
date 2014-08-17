@@ -20,7 +20,7 @@ TEST_EQUAL_OTHER_TYPES(string_t, other_types);
 TEST_LESS_SAME_TYPE(string_0, string_1);
 TEST_LESS_OTHER_TYPES(string_t, other_types);
 TEST_HASH(string_0, string_1);
-TEST_OUTPUT(string_1, "string('0')");
+TEST_OUTPUT(string_1, L"string('0')");
 
 BOOST_AUTO_TEST_SUITE_END()
 

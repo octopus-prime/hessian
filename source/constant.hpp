@@ -14,7 +14,7 @@ namespace hessian {
 struct constant
 {
 	static const date_t EPOCH;
-	static const string_t VERSION;
+	static const std::string VERSION;
 };
 
 }

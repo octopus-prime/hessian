@@ -20,7 +20,7 @@ TEST_EQUAL_OTHER_TYPES(list_t, other_types);
 TEST_LESS_SAME_TYPE(list_0, list_1);
 TEST_LESS_OTHER_TYPES(list_t, other_types);
 TEST_HASH(list_0, list_1);
-TEST_OUTPUT(list_1, "list(string('1'))");
+TEST_OUTPUT(list_1, L"list(string('1'))");
 
 BOOST_AUTO_TEST_SUITE_END()
 
