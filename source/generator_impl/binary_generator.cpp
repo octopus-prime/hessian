@@ -14,13 +14,6 @@ namespace px = boost::phoenix;
 namespace hessian {
 namespace generator_impl {
 
-//static string_t
-//workaround_for_string_issue(const binary_t& binary)
-//{
-//	const binary_t substr = binary.substr(0, 0xffff);
-//	return string_t(substr.begin(), substr.end());
-//}
-
 binary_generator::binary_generator()
 :
 	binary_generator::base_type(_binary),
@@ -49,7 +42,6 @@ binary_generator::binary_generator()
 			_length_4
 			<<
 			ka::string 						[ka::_1 = px::bind(&binary_t::substr, ka::_val, 0, 0xffff)]
-//			ka::string 						[ka::_1 = px::bind(workaround_for_string_issue, ka::_val)]
 			<<
 			_binary 						[ka::_1 = px::bind(&binary_t::substr, ka::_val, 0xffff, binary_t::npos)]
 	;
