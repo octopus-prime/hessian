@@ -59,13 +59,16 @@ parser::operator()()
 	parser_impl::reply_parser reply;
 	parser_impl::fault_parser fault;
 
+	parser_impl::input_iterator_t begin(_stream);
+	parser_impl::input_iterator_t end;
+
 	content_t content;
 
 	try
 	{
 		const bool success = qi::parse
 		(
-			parser_impl::input_iterator_t(_stream), parser_impl::input_iterator_t(),
+			begin, end,
 			version
 			>>
 			(
@@ -76,7 +79,7 @@ parser::operator()()
 			content
 		);
 
-		if (!success)
+		if (!success || begin != end)
 			throw parser_failure_exception();
 	}
 	catch(const expectation_failure& failure)
