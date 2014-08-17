@@ -8,6 +8,7 @@
 #include "string_generator.hpp"
 #include <boost/spirit/include/karma.hpp>
 #include <boost/spirit/include/phoenix.hpp>
+#include <boost/regex/pending/unicode_iterator.hpp>
 
 namespace px = boost::phoenix;
 
@@ -15,10 +16,14 @@ namespace hessian {
 namespace generator_impl {
 
 static std::string
-workaround_for_string_issue(const string_t& string)
+sub_std_string(const string_t& string, const std::size_t length)
 {
-	const string_t substr = string.substr(0, 0xffff);
-	return std::string(substr.begin(), substr.end());
+	const string_t substr = string.substr(0, length);
+	return std::string
+	(
+		boost::u32_to_u8_iterator<string_t::const_iterator>(substr.begin()),
+		boost::u32_to_u8_iterator<string_t::const_iterator>(substr.end())
+	);
 }
 
 string_generator::string_generator()
@@ -42,14 +47,13 @@ string_generator::string_generator()
 	_string_1 =
 			_length(px::bind(&string_t::size, ka::_val))
 			<<
-			ka::string
+			ka::string [ka::_1 = px::bind(sub_std_string, ka::_val, px::bind(&string_t::size, ka::_val))]
 	;
 
 	_string_2 =
 			_length_4
 			<<
-//			ka::string [ka::_1 = px::bind(&string_t::substr, ka::_val, 0, 0xffff)]
-			ka::string [ka::_1 = px::bind(workaround_for_string_issue, ka::_val)]
+			ka::string [ka::_1 = px::bind(sub_std_string, ka::_val, px::construct<std::size_t>(0xffff))]
 			<<
 			_string [ka::_1 = px::bind(&string_t::substr, ka::_val, 0xffff, string_t::npos)]
 	;
