@@ -10,6 +10,7 @@
 #include "generator_impl/version_generator.hpp"
 #include "generator_impl/value_generator.hpp"
 #include "generator_impl/string_generator.hpp"
+#include "generator_impl/int_generator.hpp"
 #include <boost/spirit/include/karma.hpp>
 #include <boost/spirit/include/phoenix.hpp>
 
@@ -38,28 +39,26 @@ void
 generator::operator()(const string_t& method, const list_t& arguments)
 {
 	generator_impl::version_generator version;
-	generator_impl::value_generator value;
 	generator_impl::string_generator string;
+	generator_impl::int_generator int_;
+	generator_impl::value_generator value;
 
 	const bool success = ka::generate
 	(
 		generator_impl::output_iterator_t(_stream),
 		version										// version
 		<<
-		ka::lit('C')								// call
+		ka::lit('C')							// call
 		<<
 		string										// method
 		<<
-		ka::byte_ << *value,						// arguments
+		int_ << *value,						// arguments
 		method,
-		arguments.size() + '\x90',
-		arguments
+		arguments.size(), arguments
 	);
 
 	if (!success)
 		throw generator_failure_exception();
-
-	// todo ka::byte_ => int_generator
 }
 
 generator_failure_exception::generator_failure_exception()
