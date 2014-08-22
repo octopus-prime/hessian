@@ -24,10 +24,13 @@ lib hessian
 exe hessian_example
 	:
 		[ glob example/*.cpp ]
+		[ glob example/source/*.cpp ]
 		hessian
 		/site-config//PocoFoundation
 		/site-config//PocoNet
+		/site-config//boost_system
 	:
+		<include>example/include
 	;
 
 unit-test hessian_test
