@@ -42,8 +42,13 @@ client_impl::call(const std::string& path, const hessian::string_t& method, cons
 void
 client_impl::send_request(const std::string& path, const hessian::string_t& method, const hessian::list_t& arguments)
 {
-	Poco::Net::HTTPRequest request(Poco::Net::HTTPRequest::HTTP_POST, path, Poco::Net::HTTPMessage::HTTP_1_1);
+	net::NameValueCollection cookies;
+	for (cookies::const_iterator cookie = _cookies.begin(); cookie != _cookies.end(); ++cookie)
+		cookies.add(cookie->first, cookie->second);
+
+	net::HTTPRequest request(net::HTTPRequest::HTTP_POST, path, net::HTTPMessage::HTTP_1_1);
 	request.setChunkedTransferEncoding(true);
+	request.setCookies(cookies);
 
 	std::ostream& request_stream = _session->sendRequest(request);
 	hessian::generator generate(request_stream);
@@ -53,10 +58,15 @@ client_impl::send_request(const std::string& path, const hessian::string_t& meth
 hessian::content_t
 client_impl::receive_response()
 {
-	Poco::Net::HTTPResponse response;
+	net::HTTPResponse response;
 	std::istream& response_stream = _session->receiveResponse(response);
-	if (response.getStatus() != Poco::Net::HTTPResponse::HTTP_OK)
+	if (response.getStatus() != net::HTTPResponse::HTTP_OK)
 		throw std::runtime_error(response.getReason());
+
+	std::vector<net::HTTPCookie> cookies;
+	response.getCookies(cookies);
+	for (std::vector<net::HTTPCookie>::const_iterator cookie = cookies.begin(); cookie != cookies.end(); ++cookie)
+		_cookies[cookie->getName()] = cookie->getValue();
 
 	hessian::parser parse(response_stream);
 	return parse();
