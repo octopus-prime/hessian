@@ -18,6 +18,8 @@ class fault_exception
 {
 protected:
 	virtual ~fault_exception() BOOST_NOEXCEPT_OR_NOTHROW {}
+
+public:
 	virtual const std::wstring& code() const BOOST_NOEXCEPT_OR_NOTHROW = 0;
 	virtual const std::wstring& message() const BOOST_NOEXCEPT_OR_NOTHROW = 0;
 };

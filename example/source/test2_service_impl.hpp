@@ -17,14 +17,25 @@ class test2_service_impl
 	public virtual test2_service_base,
 	public abstract_service_impl
 {
+	class reply_visitor
+	:
+		public boost::static_visitor<result_t>
+	{
+	public:
+		template <typename T>
+		result_type operator()(const T& reply) const;
+		result_type operator()(const hessian::boolean_t& reply) const;
+		result_type operator()(const hessian::string_t& reply) const;
+	};
+
 public:
 	test2_service_impl(const boost::shared_ptr<client_impl>& client);
 	virtual ~test2_service_impl() BOOST_NOEXCEPT_OR_NOTHROW {}
-	virtual bool arg_int_0(const boost::int32_t value);
-	virtual bool arg_double_0_0(const double value);
+	virtual result_t arg_int_0(const boost::int32_t value);
+	virtual result_t arg_double_0_0(const double value);
 //	virtual bool arg_object_1(const object_1& dto);
 //	virtual object_1 reply_object_1();
-//	virtual void fault();
+	virtual void fault();
 };
 
 }

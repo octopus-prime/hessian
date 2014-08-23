@@ -29,7 +29,7 @@ protected:
 	abstract_service_impl(const boost::shared_ptr<client_impl>& client, const std::string& path);
 	virtual ~abstract_service_impl() BOOST_NOEXCEPT_OR_NOTHROW {}
 
-	hessian::reply_t call(const hessian::string_t& method, const hessian::list_t& arguments);
+	hessian::reply_t call(const hessian::string_t& method, const hessian::list_t& arguments = hessian::list_t());
 
 private:
 	boost::shared_ptr<client_impl> _client;
