@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "test2_service.hpp"
+#include <caucho/test2_service.hpp>
 #include <string>
 #include <boost/cstdint.hpp>
 #include <boost/shared_ptr.hpp>

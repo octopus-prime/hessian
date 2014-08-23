@@ -18,10 +18,10 @@ make_u32_to_u8_iterator(const Iterator iterator)
 	return boost::u32_to_u8_iterator<Iterator>(iterator);
 }
 
-const std::wstring
+const string_t
 fault_exception_impl::CODE(L"code");
 
-const std::wstring
+const string_t
 fault_exception_impl::MESSAGE(L"message");
 
 fault_exception_impl::fault_exception_impl(const hessian::fault_t& fault)
@@ -39,27 +39,27 @@ fault_exception_impl::what() const BOOST_NOEXCEPT_OR_NOTHROW
 	return _what.c_str();
 }
 
-const std::wstring&
+const string_t&
 fault_exception_impl::code() const BOOST_NOEXCEPT_OR_NOTHROW
 {
 	return _code;
 }
 
-const std::wstring&
+const string_t&
 fault_exception_impl::message() const BOOST_NOEXCEPT_OR_NOTHROW
 {
 	return _message;
 }
 
 std::string
-fault_exception_impl::what(const std::wstring& code, const std::wstring& message)
+fault_exception_impl::what(const string_t& code, const string_t& message)
 {
 	boost::wformat format(L"Fault: Code = '%s', Message = '%s'");
-	const std::wstring wwhat = (format % code % message).str();
+	const string_t what = (format % code % message).str();
 	return std::string
 	(
-		make_u32_to_u8_iterator(wwhat.begin()),
-		make_u32_to_u8_iterator(wwhat.end())
+		make_u32_to_u8_iterator(what.begin()),
+		make_u32_to_u8_iterator(what.end())
 	);
 }
 

@@ -31,10 +31,8 @@ class test2_service_impl
 public:
 	test2_service_impl(const boost::shared_ptr<client_impl>& client);
 	virtual ~test2_service_impl() BOOST_NOEXCEPT_OR_NOTHROW {}
-	virtual result_t arg_int_0(const boost::int32_t value);
-	virtual result_t arg_double_0_0(const double value);
-//	virtual bool arg_object_1(const object_1& dto);
-//	virtual object_1 reply_object_1();
+	virtual result_t arg_int_0(const int_t value);
+	virtual result_t arg_double_0_0(const double_t value);
 	virtual void fault();
 };
 

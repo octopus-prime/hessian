@@ -17,14 +17,14 @@ test2_service_impl::test2_service_impl(const boost::shared_ptr<client_impl>& cli
 }
 
 result_t
-test2_service_impl::arg_int_0(const boost::int32_t value)
+test2_service_impl::arg_int_0(const int_t value)
 {
 	const hessian::reply_t reply = call(L"argInt_0", hessian::make_list(value));
 	return boost::apply_visitor(reply_visitor(), reply);
 }
 
 result_t
-test2_service_impl::arg_double_0_0(const double value)
+test2_service_impl::arg_double_0_0(const double_t value)
 {
 	const hessian::reply_t reply = call(L"argDouble_0_0", hessian::make_list(value));
 	return boost::apply_visitor(reply_visitor(), reply);
