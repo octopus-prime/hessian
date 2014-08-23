@@ -82,7 +82,8 @@ make_http_client(const std::string& host, const boost::uint16_t port)
 client
 make_https_client(const std::string& host, const boost::uint16_t port)
 {
-	const session session = boost::make_shared<net::HTTPClientSession>(host, port);	// todo
+	const session session = boost::make_shared<net::HTTPSClientSession>(host, port);
+	// TODO: SSL context
 	return boost::make_shared<client_impl>(session);
 }
 

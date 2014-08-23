@@ -28,6 +28,7 @@ exe hessian_example
 		hessian
 		/site-config//PocoFoundation
 		/site-config//PocoNet
+		/site-config//PocoNetSSL
 		/site-config//boost_system
 	:
 		<include>example/include
