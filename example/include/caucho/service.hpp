@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <caucho/fault_exception.hpp>
 #include <boost/shared_ptr.hpp>
 
 namespace caucho {

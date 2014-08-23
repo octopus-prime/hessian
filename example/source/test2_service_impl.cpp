@@ -19,7 +19,7 @@ test2_service_impl::test2_service_impl(const boost::shared_ptr<client_impl>& cli
 bool
 test2_service_impl::arg_int_0(const boost::int32_t value)
 {
-	const hessian::reply_t reply = call(L"argInt_0", hessian::make_list(value));
+	const hessian::reply_t reply = call(L"argInt_0xx", hessian::make_list(value));
 	return boost::get<hessian::boolean_t>(reply);
 }
 

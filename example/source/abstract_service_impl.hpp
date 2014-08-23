@@ -16,6 +16,15 @@ class abstract_service_impl
 :
 	public virtual service_base
 {
+	class content_visitor
+	:
+		public boost::static_visitor<const hessian::reply_t&>
+	{
+	public:
+		result_type operator()(const hessian::reply_t& reply) const;
+		result_type operator()(const hessian::fault_t& fault) const;
+	};
+
 protected:
 	abstract_service_impl(const boost::shared_ptr<client_impl>& client, const std::string& path);
 	virtual ~abstract_service_impl() BOOST_NOEXCEPT_OR_NOTHROW {}
