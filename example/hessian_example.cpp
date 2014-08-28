@@ -6,6 +6,7 @@
  */
 
 #include <caucho/client.hpp>
+#include <Poco/Exception.h>
 #include <exception>
 #include <iostream>
 
@@ -14,7 +15,11 @@ main()
 {
 	try
 	{
-		const caucho::client client = caucho::make_http_client("hessian.caucho.com", 80);
+		caucho::download_file("http://httpbin.org/stream/100", "out.txt");
+		caucho::download_file("https://sslcheck.globalsign.com/images/special-offer-sticker.png", "special-offer-sticker.png");
+
+		const caucho::client client = caucho::make_client("http://hessian.caucho.com");
+
 		const caucho::test2_service service = client->get_test2_service();
 
 		std::wcout << std::boolalpha;
@@ -28,6 +33,10 @@ main()
 	catch (const caucho::fault_exception& exception)
 	{
 		std::wcerr << L"fault: " << exception.code() << L": " << exception.message() << std::endl;
+	}
+	catch (const Poco::Exception& exception)
+	{
+		std::cerr << "error: " << exception.displayText() << std::endl;
 	}
 	catch (const std::exception& exception)
 	{

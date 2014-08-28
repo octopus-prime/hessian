@@ -30,8 +30,11 @@ exe hessian_example
 		/site-config//PocoNet
 		/site-config//PocoNetSSL
 		/site-config//boost_system
+		/site-config//boost_log
+		/site-config//pthread
 	:
 		<include>example/include
+		<define>BOOST_LOG_DYN_LINK
 	;
 
 unit-test hessian_test

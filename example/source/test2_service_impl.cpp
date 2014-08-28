@@ -6,6 +6,7 @@
  */
 
 #include "test2_service_impl.hpp"
+#include <boost/log/trivial.hpp>
 
 namespace caucho {
 
@@ -20,6 +21,7 @@ result_t
 test2_service_impl::arg_int_0(const int_t value)
 {
 	const hessian::reply_t reply = call(L"argInt_0", hessian::make_list(value));
+	BOOST_LOG_TRIVIAL(info) << "Called argInt_0(" << value << ")";
 	return boost::apply_visitor(reply_visitor(), reply);
 }
 
@@ -27,6 +29,7 @@ result_t
 test2_service_impl::arg_double_0_0(const double_t value)
 {
 	const hessian::reply_t reply = call(L"argDouble_0_0", hessian::make_list(value));
+	BOOST_LOG_TRIVIAL(info) << "Called argDouble_0_0(" << value << ")";
 	return boost::apply_visitor(reply_visitor(), reply);
 }
 
@@ -34,6 +37,7 @@ void
 test2_service_impl::fault()
 {
 	call(L"doesNotExist");
+	BOOST_LOG_TRIVIAL(info) << "Called doesNotExist()";
 }
 
 test2_service_impl::reply_visitor::result_type

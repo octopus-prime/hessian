@@ -7,11 +7,16 @@
 
 #include "client_impl.hpp"
 #include "test2_service_impl.hpp"
-#include <Poco/Net/HTTPSClientSession.h>
+#include <Poco/URI.h>
+#include <Poco/URIStreamOpener.h>
+#include <Poco/StreamCopier.h>
+#include <Poco/Net/HTTPSessionFactory.h>
 #include <Poco/Net/HTTPRequest.h>
 #include <Poco/Net/HTTPMessage.h>
 #include <Poco/Net/HTTPResponse.h>
 #include <boost/make_shared.hpp>
+#include <boost/log/trivial.hpp>
+#include <fstream>
 
 namespace caucho {
 
@@ -72,19 +77,31 @@ client_impl::receive_response()
 	return parse();
 }
 
-client
-make_http_client(const std::string& host, const boost::uint16_t port)
+static void
+destroy_session(net::HTTPClientSession* session)
 {
-	const session session = boost::make_shared<net::HTTPClientSession>(host, port);
-	return boost::make_shared<client_impl>(session);
+	delete session;
+	BOOST_LOG_TRIVIAL(info) << "Destroyed client session";
 }
 
 client
-make_https_client(const std::string& host, const boost::uint16_t port)
+make_client(const std::string& uri)
 {
-	const session session = boost::make_shared<net::HTTPSClientSession>(host, port);
-	// TODO: SSL context
+	net::HTTPSessionFactory& factory = net::HTTPSessionFactory::defaultFactory();
+	const session session(factory.createClientSession(Poco::URI(uri)), destroy_session);
+	BOOST_LOG_TRIVIAL(info) << "Created client session to uri '" << uri << "'";
 	return boost::make_shared<client_impl>(session);
+}
+
+void
+download_file(const std::string& uri, const std::string& file)
+{
+	const Poco::URIStreamOpener& opener = Poco::URIStreamOpener::defaultOpener();
+	const std::auto_ptr<std::istream> input_stream(opener.open(uri));
+	std::ofstream output_stream(file.c_str());
+	const std::size_t bytes = Poco::StreamCopier::copyStream(*input_stream, output_stream);
+	output_stream.close();
+	BOOST_LOG_TRIVIAL(info) << "Loaded file '" << file << "' (" << bytes << " bytes) down from uri '" << uri << "'";
 }
 
 }

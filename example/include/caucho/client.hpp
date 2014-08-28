@@ -26,9 +26,9 @@ public:
 typedef boost::shared_ptr<client_base> client;
 
 client
-make_http_client(const std::string& host, const boost::uint16_t port);
+make_client(const std::string& uri);
 
-client
-make_https_client(const std::string& host, const boost::uint16_t port);
+void
+download_file(const std::string& uri, const std::string& file);
 
 }
