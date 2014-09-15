@@ -5,6 +5,7 @@
  *      Author: mike_gresens
  */
 
+#include "hessian_example_pch.hpp"	// windows... wth!
 #include <caucho/client.hpp>
 #include <Poco/Exception.h>
 #include <exception>
@@ -16,7 +17,10 @@ main()
 	try
 	{
 		caucho::download_file("http://httpbin.org/stream/100", "out.txt");
+
+#ifndef _WIN32
 		caucho::download_file("https://sslcheck.globalsign.com/images/special-offer-sticker.png", "special-offer-sticker.png");
+#endif
 
 		const caucho::client client = caucho::make_client("http://hessian.caucho.com");
 

@@ -5,6 +5,7 @@
  *      Author: mike_gresens
  */
 
+#include "hessian_example_pch.hpp"
 #include "abstract_service_impl.hpp"
 #include "fault_exception_impl.hpp"
 

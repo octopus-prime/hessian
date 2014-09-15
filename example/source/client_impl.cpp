@@ -5,6 +5,7 @@
  *      Author: mike_gresens
  */
 
+#include "hessian_example_pch.hpp"
 #include "client_impl.hpp"
 #include "test2_service_impl.hpp"
 #include <Poco/URI.h>

@@ -5,6 +5,7 @@
  *      Author: mike_gresens
  */
 
+#include "hessian_example_pch.hpp"
 #include "test2_service_impl.hpp"
 #include <boost/log/trivial.hpp>
 

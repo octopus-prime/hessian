@@ -12,8 +12,13 @@
 namespace hessian {
 namespace fixture {
 
-#define UNICODE_STRING "a""1""是""本""文"
-#define UNICODE_STRING2 L"a"L"1"L"是"L"本"L"文"
+//#define UNICODE_STRING   u8"a1是本文"
+//#define UNICODE_STRING2 u"a1是本文"
+
+#pragma execution_character_set("utf-8")
+
+#define UNICODE_STRING   "a1\u662F\u672C\u6587"
+#define UNICODE_STRING2 L"a1\u662F\u672C\u6587"
 
 const string_t fixture_string::string_0 = string_t();
 const string_t fixture_string::string_1 = string_t(L"0");

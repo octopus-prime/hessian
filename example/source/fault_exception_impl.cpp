@@ -5,6 +5,7 @@
  *      Author: mike_gresens
  */
 
+#include "hessian_example_pch.hpp"
 #include "fault_exception_impl.hpp"
 #include <boost/format.hpp>
 #include <boost/regex/pending/unicode_iterator.hpp>
@@ -12,10 +13,10 @@
 namespace caucho {
 
 template <typename Iterator>
-boost::u32_to_u8_iterator<Iterator>
+boost::u32_to_u8_iterator<boost::u16_to_u32_iterator<Iterator> >
 make_u32_to_u8_iterator(const Iterator iterator)
 {
-	return boost::u32_to_u8_iterator<Iterator>(iterator);
+	return boost::u32_to_u8_iterator<boost::u16_to_u32_iterator<Iterator> >(iterator);
 }
 
 const string_t

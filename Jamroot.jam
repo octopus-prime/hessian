@@ -5,17 +5,14 @@ project hessian
 	:
 		requirements
 		<include>include
-		<include>/usr/include/c++/4.2.1//x86_64-apple-darwin10/
 	;
-
+	
 cpp-pch hessian_hpp
 	:
 		source/hessian_pch.hpp
+		/site-config//boost
 	:
 		<include>source
-#		<include>/site-config//boost
-#		<include>C:/Entwicklung/boost_1_56_0
-		<include>/opt/local/include
 	;
 
 lib hessian
@@ -36,11 +33,9 @@ lib hessian
 cpp-pch hessian_test_hpp
 	:
 		test/hessian_test_pch.hpp
+		/site-config//boost
 	:
 		<include>test
-#		<include>/site-config//boost
-#		<include>C:/Entwicklung/boost_1_56_0
-		<include>/opt/local/include
 	;
 
 unit-test hessian_test
@@ -58,21 +53,31 @@ unit-test hessian_test
 		<define>BOOST_TEST_DYN_LINK
 	;
 
-#exe hessian_example
-#	:
-#		[ glob example/*.cpp ]
-#		[ glob example/source/*.cpp ]
-#		hessian
-#		/site-config//PocoFoundation
-#		/site-config//PocoNet
-##		/site-config//PocoNetSSL
-#		/site-config//boost_system
-#		/site-config//boost_log
-##		/site-config//pthread
-#	:
-#		<include>example/include
-#		<define>BOOST_LOG_DYN_LINK
-#	;
+cpp-pch hessian_example_hpp
+	:
+		example/source/hessian_example_pch.hpp
+		/site-config//boost
+		/site-config//Poco
+	:
+		<include>example/source
+	;
+
+exe hessian_example
+	:
+		hessian_example_hpp
+		[ glob example/*.cpp ]
+		[ glob example/source/*.cpp ]
+		hessian
+		/site-config//PocoFoundation
+		/site-config//PocoNet
+#		/site-config//PocoNetSSL
+		/site-config//boost_system
+		/site-config//boost_log
+#		/site-config//pthread
+	:
+		<include>example/include
+		<define>BOOST_LOG_DYN_LINK
+	;
 
 doxygen hessian.html
 	:
