@@ -36,7 +36,7 @@ initializer::initializer()
 #ifndef _WIN32
 		const net::Context::Ptr context(new net::Context(net::Context::CLIENT_USE, "", "", ""));
 		const net::SSLManager::InvalidCertificateHandlerPtr certificateHandler(new net::AcceptCertificateHandler(false));
-		const net::SSLManager::InvalidCertificateHandlerPtr certificateHandler(new net::ConsoleCertificateHandler(false));
+//		const net::SSLManager::InvalidCertificateHandlerPtr certificateHandler(new net::ConsoleCertificateHandler(false));
 #endif
 
 		net::initializeNetwork();

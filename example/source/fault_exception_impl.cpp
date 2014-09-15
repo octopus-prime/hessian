@@ -12,12 +12,21 @@
 
 namespace caucho {
 
+#ifdef _WIN32
 template <typename Iterator>
 boost::u32_to_u8_iterator<boost::u16_to_u32_iterator<Iterator> >
 make_u32_to_u8_iterator(const Iterator iterator)
 {
 	return boost::u32_to_u8_iterator<boost::u16_to_u32_iterator<Iterator> >(iterator);
 }
+#else
+template <typename Iterator>
+boost::u32_to_u8_iterator<Iterator>
+make_u32_to_u8_iterator(const Iterator iterator)
+{
+	return boost::u32_to_u8_iterator<Iterator>(iterator);
+}
+#endif
 
 const string_t
 fault_exception_impl::CODE(L"code");

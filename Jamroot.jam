@@ -70,12 +70,13 @@ exe hessian_example
 		hessian
 		/site-config//PocoFoundation
 		/site-config//PocoNet
-#		/site-config//PocoNetSSL
+		/site-config//PocoNetSSL
 		/site-config//boost_system
 		/site-config//boost_log
 #		/site-config//pthread
 	:
 		<include>example/include
+		<include>example/source
 		<define>BOOST_LOG_DYN_LINK
 	;
 
