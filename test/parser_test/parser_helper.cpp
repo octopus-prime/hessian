@@ -8,6 +8,7 @@
 #include "hessian_test_pch.hpp"
 #include "parser_helper.hpp"
 #include "../constant.hpp"
+#include <boost/variant/get.hpp>
 
 namespace hessian {
 namespace parser_test {

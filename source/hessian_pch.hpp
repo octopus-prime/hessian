@@ -1,3 +1,5 @@
+#ifdef _WIN32
+
 #include <string>
 #include <vector>
 #include <map>
@@ -14,3 +16,5 @@
 #include <boost/fusion/adapted/std_pair.hpp>
 #include <boost/range/algorithm/transform.hpp>
 #include <boost/bind.hpp>
+
+#endif

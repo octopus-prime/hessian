@@ -1,3 +1,5 @@
+#ifdef _WIN32
+
 #include <string>
 #include <vector>
 #include <map>
@@ -7,3 +9,5 @@
 #include <boost/variant.hpp>
 #include <boost/assign.hpp>
 //#include <boost/test/unit_test.hpp>
+
+#endif

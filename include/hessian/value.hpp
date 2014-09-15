@@ -191,6 +191,8 @@ operator<<(std::wostream& stream, const value_t& value);
 }
 
 // Workaround for MSVC :-(
+#ifdef _WIN32
+
 namespace boost {
 
 template <>
@@ -201,3 +203,5 @@ swap(hessian::value_t& lhs, hessian::value_t& rhs)
 }
 
 }
+
+#endif

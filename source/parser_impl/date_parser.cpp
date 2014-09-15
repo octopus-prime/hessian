@@ -10,6 +10,7 @@
 #include "../constant.hpp"
 #include <boost/spirit/include/qi.hpp>
 #include <boost/spirit/include/phoenix.hpp>
+#include <boost/date_time/posix_time/posix_time_types.hpp>
 
 namespace px = boost::phoenix;
 namespace pt = boost::posix_time;

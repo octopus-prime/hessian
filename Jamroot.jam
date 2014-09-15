@@ -5,6 +5,7 @@ project hessian
 	:
 		requirements
 		<include>include
+		<include>/usr/include/c++/4.2.1//x86_64-apple-darwin10/
 	;
 
 cpp-pch hessian_hpp
@@ -13,7 +14,8 @@ cpp-pch hessian_hpp
 	:
 		<include>source
 #		<include>/site-config//boost
-		<include>C:/Entwicklung/boost_1_56_0
+#		<include>C:/Entwicklung/boost_1_56_0
+		<include>/opt/local/include
 	;
 
 lib hessian
@@ -26,6 +28,7 @@ lib hessian
 		/site-config//boost_date_time
 		/site-config//boost_system
 	:
+		<include>source
 		<define>EXPORT_HESSIAN
 		<define>BOOST_SPIRIT_USE_PHOENIX_V3
 	;
@@ -36,7 +39,8 @@ cpp-pch hessian_test_hpp
 	:
 		<include>test
 #		<include>/site-config//boost
-		<include>C:/Entwicklung/boost_1_56_0
+#		<include>C:/Entwicklung/boost_1_56_0
+		<include>/opt/local/include
 	;
 
 unit-test hessian_test
@@ -50,6 +54,7 @@ unit-test hessian_test
 		hessian
 		/site-config//boost_unit_test_framework
 	:
+		<include>test
 		<define>BOOST_TEST_DYN_LINK
 	;
 
