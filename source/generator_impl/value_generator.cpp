@@ -97,7 +97,7 @@ value_generator::value_generator()
 	;
 
 	_list_or_ref =
-			_ref							[ka::_1 = px::construct<value_t>(ka::_val)]
+			_ref							[ka::_pass = !px::bind(&list_t::empty, ka::_val), ka::_1 = px::construct<value_t>(ka::_val)]
 			|
 			_list
 	;
@@ -124,7 +124,7 @@ value_generator::value_generator()
 	;
 
 	_map_or_ref =
-			_ref							[ka::_1 = px::construct<value_t>(ka::_val)]
+			_ref							[ka::_pass = !px::bind(&map_t::empty, ka::_val), ka::_1 = px::construct<value_t>(ka::_val)]
 			|
 			_map
 	;
@@ -144,7 +144,7 @@ value_generator::value_generator()
 	;
 
 	_object_or_ref =
-			_ref							[ka::_1 = px::construct<value_t>(ka::_val)]
+			_ref							[ka::_pass = !px::bind(&object_t::empty, ka::_val), ka::_1 = px::construct<value_t>(ka::_val)]
 			|
 			_object
 	;
