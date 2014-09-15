@@ -34,7 +34,7 @@ const std::string fixture_string::hessian_65536 = std::string("R\xff\xff", 3) + 
 
 #define UNICODE_STRING "a""1""是""本""文"
 
-const string_t fixture_string::string_unicode = string_t(UNICODE_STRING2);
+const string_t fixture_string::string_unicode = string_t(UNICODE_STRING);
 const std::string fixture_string::hessian_unicode = std::string("\x05", 1) + std::string(UNICODE_STRING);
 
 #endif
