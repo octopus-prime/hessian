@@ -5,6 +5,7 @@
  *      Author: mike_gresens
  */
 
+#include "hessian_pch.hpp"
 #include "hash_visitor.hpp"
 #include "../constant.hpp"
 

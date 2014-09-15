@@ -5,6 +5,7 @@
  *      Author: mgresens
  */
 
+#include "hessian_test_pch.hpp"
 #include "fixture_date.hpp"
 #include <boost/date_time.hpp>
 

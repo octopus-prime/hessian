@@ -5,6 +5,7 @@
  *      Author: mike_gresens
  */
 
+#include "hessian_pch.hpp"
 #include "output_visitor.hpp"
 #include <boost/date_time/posix_time/time_formatters.hpp>
 #include <boost/algorithm/hex.hpp>

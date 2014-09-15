@@ -7,8 +7,18 @@ project hessian
 		<include>include
 	;
 
+cpp-pch hessian_hpp
+	:
+		source/hessian_pch.hpp
+	:
+		<include>source
+#		<include>/site-config//boost
+		<include>C:/Entwicklung/boost_1_56_0
+	;
+
 lib hessian
 	:
+		hessian_hpp
 		[ glob source/*.cpp ]
 		[ glob source/value_impl/*.cpp ]
 		[ glob source/parser_impl/*.cpp ]
@@ -16,29 +26,22 @@ lib hessian
 		/site-config//boost_date_time
 		/site-config//boost_system
 	:
+		<define>EXPORT_HESSIAN
 		<define>BOOST_SPIRIT_USE_PHOENIX_V3
-#		<cxxflags>--coverage
-#		<linkflags>--coverage
 	;
 
-exe hessian_example
+cpp-pch hessian_test_hpp
 	:
-		[ glob example/*.cpp ]
-		[ glob example/source/*.cpp ]
-		hessian
-		/site-config//PocoFoundation
-		/site-config//PocoNet
-		/site-config//PocoNetSSL
-		/site-config//boost_system
-		/site-config//boost_log
-		/site-config//pthread
+		test/hessian_test_pch.hpp
 	:
-		<include>example/include
-		<define>BOOST_LOG_DYN_LINK
+		<include>test
+#		<include>/site-config//boost
+		<include>C:/Entwicklung/boost_1_56_0
 	;
 
 unit-test hessian_test
 	:
+		hessian_test_hpp
 		[ glob test/*.cpp ]
 		[ glob test/fixture/*.cpp ]
 		[ glob test/value_test/*.cpp ]
@@ -49,6 +52,22 @@ unit-test hessian_test
 	:
 		<define>BOOST_TEST_DYN_LINK
 	;
+
+#exe hessian_example
+#	:
+#		[ glob example/*.cpp ]
+#		[ glob example/source/*.cpp ]
+#		hessian
+#		/site-config//PocoFoundation
+#		/site-config//PocoNet
+##		/site-config//PocoNetSSL
+#		/site-config//boost_system
+#		/site-config//boost_log
+##		/site-config//pthread
+#	:
+#		<include>example/include
+#		<define>BOOST_LOG_DYN_LINK
+#	;
 
 doxygen hessian.html
 	:

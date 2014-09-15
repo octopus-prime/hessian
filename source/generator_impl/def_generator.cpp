@@ -5,6 +5,7 @@
  *      Author: mgresens
  */
 
+#include "hessian_pch.hpp"
 #include "def_generator.hpp"
 #include <boost/spirit/include/karma.hpp>
 #include <boost/spirit/include/phoenix.hpp>

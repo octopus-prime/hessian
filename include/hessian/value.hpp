@@ -7,15 +7,17 @@
 
 #pragma once
 
+#include <hessian/config.hpp>
 #include <string>
 #include <map>
 #include <vector>
 #include <iostream>
 #include <boost/blank.hpp>
 #include <boost/cstdint.hpp>
-#include <boost/date_time/posix_time/posix_time_types.hpp>
+#include <boost/date_time/posix_time/ptime.hpp>
 #include <boost/unordered_map.hpp>
-#include <boost/variant.hpp>
+#include <boost/variant/variant_fwd.hpp>
+#include <boost/variant/recursive_variant.hpp>
 #include <boost/assign/list_of.hpp>
 
 namespace hessian {
@@ -85,7 +87,7 @@ typedef boost::make_recursive_variant
 /**
  * Function object for performing comparisons.
  */
-struct less
+struct HESSIAN_EXPORT less
 :
 	std::binary_function<value_t, value_t, bool>
 {
@@ -102,7 +104,7 @@ struct less
 /**
  * Function object for performing comparisons.
  */
-struct equal_to
+struct HESSIAN_EXPORT equal_to
 :
 	std::binary_function<value_t, value_t, bool>
 {
@@ -119,7 +121,7 @@ struct equal_to
 /**
  * Function object for performing hashing.
  */
-struct hash
+struct HESSIAN_EXPORT hash
 :
 	std::unary_function<value_t, std::size_t>
 {
@@ -147,6 +149,7 @@ typedef std::map<value_t, value_t, less> map_t;
  */
 typedef boost::unordered_map<string_t, value_t> object_t;
 
+HESSIAN_EXPORT
 /**
  * Builds list.
  * @param value The value.
@@ -155,6 +158,7 @@ typedef boost::unordered_map<string_t, value_t> object_t;
 boost::assign_detail::generic_list<list_t::value_type>
 make_list(const list_t::value_type& value);
 
+HESSIAN_EXPORT
 /**
  * Builds map.
  * @param key The key.
@@ -164,6 +168,7 @@ make_list(const list_t::value_type& value);
 boost::assign_detail::generic_list<std::pair<map_t::key_type, map_t::mapped_type> >
 make_map(const map_t::key_type& key, const map_t::mapped_type& value);
 
+HESSIAN_EXPORT
 /**
  * Builds object.
  * @param key The key.
@@ -173,6 +178,7 @@ make_map(const map_t::key_type& key, const map_t::mapped_type& value);
 boost::assign_detail::generic_list<std::pair<object_t::key_type, object_t::mapped_type> >
 make_object(const object_t::key_type& key, const object_t::mapped_type& value);
 
+HESSIAN_EXPORT
 /**
  * Output operator.
  * @param stream The stream.
@@ -181,5 +187,17 @@ make_object(const object_t::key_type& key, const object_t::mapped_type& value);
  */
 std::wostream&
 operator<<(std::wostream& stream, const value_t& value);
+
+}
+
+// Workaround for MSVC :-(
+namespace boost {
+
+template <>
+inline void
+swap(hessian::value_t& lhs, hessian::value_t& rhs)
+{
+	std::swap(lhs, rhs);
+}
 
 }

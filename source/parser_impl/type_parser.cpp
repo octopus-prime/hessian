@@ -5,6 +5,7 @@
  *      Author: mgresens
  */
 
+#include "hessian_pch.hpp"
 #include "type_parser.hpp"
 #include <boost/spirit/include/qi.hpp>
 

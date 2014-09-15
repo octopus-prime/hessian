@@ -5,6 +5,7 @@
  *      Author: mgresens
  */
 
+#include "hessian_test_pch.hpp"
 #include "fixture_string.hpp"
 #include "string_helper.hpp"
 
@@ -12,6 +13,7 @@ namespace hessian {
 namespace fixture {
 
 #define UNICODE_STRING "a""1""是""本""文"
+#define UNICODE_STRING2 L"a"L"1"L"是"L"本"L"文"
 
 const string_t fixture_string::string_0 = string_t();
 const string_t fixture_string::string_1 = string_t(L"0");
@@ -21,7 +23,7 @@ const string_t fixture_string::string_1023 = make_string_1023();
 const string_t fixture_string::string_1024 = make_string_1024();
 const string_t fixture_string::string_65535 = make_string_65535();
 const string_t fixture_string::string_65536 = make_string_65536();
-const string_t fixture_string::string_unicode = string_t(L""UNICODE_STRING);
+const string_t fixture_string::string_unicode = string_t(UNICODE_STRING2);
 
 const std::string fixture_string::hessian_0 = std::string("\x00", 1) + std::string(string_0.begin(), string_0.end());
 const std::string fixture_string::hessian_1 = std::string("\x01", 1) + std::string(string_1.begin(), string_1.end());

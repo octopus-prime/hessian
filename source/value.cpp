@@ -5,6 +5,7 @@
  *      Author: mike_gresens
  */
 
+#include "hessian_pch.hpp"
 #include <hessian/value.hpp>
 #include "value_impl/less_visitor.hpp"
 #include "value_impl/equal_visitor.hpp"

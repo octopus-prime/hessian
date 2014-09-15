@@ -8,7 +8,7 @@
 #pragma once
 
 #include <hessian/hessian.hpp>
-#include "../../source/constant.hpp"
+#include "../constant.hpp"
 #include <boost/test/unit_test.hpp>
 
 namespace hessian {

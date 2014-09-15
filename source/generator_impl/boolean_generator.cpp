@@ -5,6 +5,7 @@
  *      Author: mgresens
  */
 
+#include "hessian_pch.hpp"
 #include "boolean_generator.hpp"
 
 namespace hessian {

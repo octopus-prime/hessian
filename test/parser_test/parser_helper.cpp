@@ -5,8 +5,9 @@
  *      Author: mike_gresens
  */
 
+#include "hessian_test_pch.hpp"
 #include "parser_helper.hpp"
-#include "../../source/constant.hpp"
+#include "../constant.hpp"
 
 namespace hessian {
 namespace parser_test {

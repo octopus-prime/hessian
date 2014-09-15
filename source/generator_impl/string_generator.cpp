@@ -5,6 +5,7 @@
  *      Author: mgresens
  */
 
+#include "hessian_pch.hpp"
 #include "string_generator.hpp"
 #include <boost/spirit/include/karma.hpp>
 #include <boost/spirit/include/phoenix.hpp>
@@ -15,14 +16,20 @@ namespace px = boost::phoenix;
 namespace hessian {
 namespace generator_impl {
 
+#ifdef _WIN32
+	typedef boost::u32_to_u8_iterator<boost::u16_to_u32_iterator<string_t::const_iterator> > utf_iterator;
+#else
+	typedef boost::u32_to_u8_iterator<string_t::const_iterator> utf_iterator;
+#endif
+
 static std::string
 sub_std_string(const string_t& string, const std::size_t length)
 {
 	const string_t substr = string.substr(0, length);
 	return std::string
 	(
-		boost::u32_to_u8_iterator<string_t::const_iterator>(substr.begin()),
-		boost::u32_to_u8_iterator<string_t::const_iterator>(substr.end())
+		utf_iterator(substr.begin()),
+		utf_iterator(substr.end())
 	);
 }
 

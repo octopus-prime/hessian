@@ -5,6 +5,7 @@
  *      Author: mgresens
  */
 
+#include "hessian_test_pch.hpp"
 #include "string_helper.hpp"
 #include <boost/format.hpp>
 #include <boost/algorithm/string/erase.hpp>

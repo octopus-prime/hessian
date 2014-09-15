@@ -28,17 +28,17 @@ namespace ka = boost::spirit::karma;
 namespace hessian {
 namespace generator_impl {
 
+typedef std::vector<string_t> def_t;
+typedef boost::unordered_map<def_t, std::size_t> defs_t;
+typedef std::pair<boost::optional<boost::reference_wrapper<const def_t> >, std::size_t> def_index_t;
+
+typedef boost::unordered_map<value_t, std::size_t, hash, equal_to> refs_t;
+typedef std::pair<bool, std::size_t> ref_index_t;
+
 class value_generator
 :
 	public ka::grammar<output_iterator_t, value_t()>
 {
-	typedef std::vector<string_t> def_t;
-	typedef boost::unordered_map<def_t, std::size_t> defs_t;
-	typedef std::pair<boost::optional<boost::reference_wrapper<const def_t> >, std::size_t> def_index_t;
-
-	typedef boost::unordered_map<value_t, std::size_t, hash, equal_to> refs_t;
-	typedef std::pair<bool, std::size_t> ref_index_t;
-
 public:
 	value_generator();
 

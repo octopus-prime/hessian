@@ -16,7 +16,7 @@ namespace hessian {
 /**
  * Defines generator exception.
  */
-class generator_exception
+class HESSIAN_EXPORT generator_exception
 :
 	public exception
 {
@@ -27,7 +27,7 @@ protected:
 /**
  * Implements generator.
  */
-class generator
+class HESSIAN_EXPORT generator
 {
 public:
 	/**

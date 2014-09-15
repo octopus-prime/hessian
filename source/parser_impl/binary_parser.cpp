@@ -5,6 +5,7 @@
  *      Author: mike_gresens
  */
 
+#include "hessian_pch.hpp"
 #include "binary_parser.hpp"
 #include <boost/spirit/include/qi.hpp>
 #include <boost/spirit/include/phoenix.hpp>

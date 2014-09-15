@@ -5,6 +5,7 @@
  *      Author: mgresens
  */
 
+#include "hessian_pch.hpp"
 #include "value_generator.hpp"
 #include <boost/spirit/include/karma.hpp>
 #include <boost/spirit/include/phoenix.hpp>
@@ -153,9 +154,9 @@ value_generator::value_generator()
 			(
 			ka::eps							[ka::_a = px::bind(&value_generator::def, this, ka::_val)]
 			<<
-			(-_def)							[ka::_1 = px::bind(&value_generator::def_index_t::first, ka::_a)]
+			(-_def)							[ka::_1 = px::bind(&def_index_t::first, ka::_a)]
 			<<
-			_index							[ka::_1 = px::bind(&value_generator::def_index_t::second, ka::_a)]
+			_index							[ka::_1 = px::bind(&def_index_t::second, ka::_a)]
 			<<
 			(*_value)						[ka::_1 = px::bind(get_values, ka::_val)]
 			)
@@ -182,15 +183,15 @@ value_generator::value_generator()
 	_ref =
 			ka::eps							[ka::_a = px::bind(&value_generator::ref, this, ka::_val)]
 			<<
-			ka::eps (!px::bind(&value_generator::ref_index_t::first, ka::_a))	// no emplace => was emplaced before => use ref
+			ka::eps (!px::bind(&ref_index_t::first, ka::_a))	// no emplace => was emplaced before => use ref
 			<<
 			ka::lit('Q')
 			<<
-			_int							[ka::_1 = px::bind(&value_generator::ref_index_t::second, ka::_a)]
+			_int							[ka::_1 = px::bind(&ref_index_t::second, ka::_a)]
 	;
 }
 
-value_generator::def_index_t
+def_index_t
 value_generator::def(const object_t& object)
 {
 	const std::pair<defs_t::const_iterator, bool> emplaced = _defs.emplace
@@ -209,7 +210,7 @@ value_generator::def(const object_t& object)
 	);
 }
 
-value_generator::ref_index_t
+ref_index_t
 value_generator::ref(const value_t& value)
 {
 	const std::pair<refs_t::const_iterator, bool> emplaced = _refs.emplace

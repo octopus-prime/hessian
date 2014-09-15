@@ -5,6 +5,7 @@
  *      Author: mike_gresens
  */
 
+#include "hessian_pch.hpp"
 #include "equal_visitor.hpp"
 #include <boost/algorithm/cxx14/equal.hpp>
 

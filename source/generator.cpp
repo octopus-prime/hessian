@@ -5,6 +5,7 @@
  *      Author: mike_gresens
  */
 
+#include "hessian_pch.hpp"
 #include <hessian/generator.hpp>
 #include "generator_impl/output_iterator.hpp"
 #include "generator_impl/version_generator.hpp"

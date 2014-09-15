@@ -5,6 +5,7 @@
  *      Author: mike_gresens
  */
 
+#include "hessian_pch.hpp"
 #include "version_parser.hpp"
 #include "../constant.hpp"
 #include <boost/spirit/include/qi.hpp>

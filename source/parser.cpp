@@ -5,6 +5,7 @@
  *      Author: mike_gresens
  */
 
+#include "hessian_pch.hpp"
 #include <hessian/parser.hpp>
 #include "parser_impl/input_iterator.hpp"
 #include "parser_impl/version_parser.hpp"

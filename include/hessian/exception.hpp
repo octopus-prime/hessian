@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <hessian/config.hpp>
 #include <exception>
 #include <boost/config/suffix.hpp>
 
@@ -15,7 +16,7 @@ namespace hessian {
 /**
  * Defines exception.
  */
-class exception
+class HESSIAN_EXPORT exception
 :
 	public std::exception
 {

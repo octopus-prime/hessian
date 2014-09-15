@@ -5,6 +5,7 @@
  *      Author: mgresens
  */
 
+#include "hessian_pch.hpp"
 #include "date_generator.hpp"
 #include "../constant.hpp"
 #include <boost/spirit/include/karma.hpp>

@@ -5,6 +5,7 @@
  *      Author: mgresens
  */
 
+#include "hessian_test_pch.hpp"
 #include "fixture_map.hpp"
 #include <boost/assign/list_of.hpp>
 

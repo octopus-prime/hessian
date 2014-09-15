@@ -5,7 +5,7 @@
  *      Author: mgresens
  */
 
-#include "hessian_pch.hpp"
+#include "hessian_test_pch.hpp"
 #include "constant.hpp"
 
 namespace hessian {

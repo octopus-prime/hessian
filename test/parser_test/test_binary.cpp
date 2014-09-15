@@ -5,6 +5,7 @@
  *      Author: mgresens
  */
 
+#include "hessian_test_pch.hpp"
 #include "parser_helper.hpp"
 #include "../fixture/fixture_binary.hpp"
 

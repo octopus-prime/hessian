@@ -5,6 +5,7 @@
  *      Author: mike_gresens
  */
 
+#include "hessian_test_pch.hpp"
 #include "value_helper.hpp"
 #include "../fixture/fixture_boolean.hpp"
 

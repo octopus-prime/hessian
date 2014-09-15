@@ -5,6 +5,7 @@
  *      Author: mike_gresens
  */
 
+#include "hessian_pch.hpp"
 #include "version_generator.hpp"
 #include "../constant.hpp"
 #include <boost/spirit/include/karma.hpp>

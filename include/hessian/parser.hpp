@@ -35,7 +35,7 @@ typedef boost::variant
 /**
  * Defines parser exception.
  */
-class parser_exception
+class HESSIAN_EXPORT parser_exception
 :
 	public exception
 {
@@ -46,7 +46,7 @@ protected:
 /**
  * Implements parser.
  */
-class parser
+class HESSIAN_EXPORT parser
 {
 public:
 	/**

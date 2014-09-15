@@ -5,6 +5,7 @@
  *      Author: mgresens
  */
 
+#include "hessian_pch.hpp"
 #include "date_parser.hpp"
 #include "../constant.hpp"
 #include <boost/spirit/include/qi.hpp>
