@@ -14,7 +14,7 @@ namespace caucho {
 
 class fault_exception
 :
-	public exception
+	public virtual exception
 {
 protected:
 	virtual ~fault_exception() BOOST_NOEXCEPT_OR_NOTHROW {}

@@ -18,7 +18,7 @@ namespace hessian {
  */
 class HESSIAN_EXPORT generator_exception
 :
-	public exception
+	public virtual exception
 {
 protected:
 	virtual ~generator_exception() BOOST_NOEXCEPT_OR_NOTHROW {}

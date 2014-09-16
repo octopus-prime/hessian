@@ -9,24 +9,20 @@
 #include "fault_exception_impl.hpp"
 #include <boost/format.hpp>
 #include <boost/regex/pending/unicode_iterator.hpp>
+#include <boost/mpl/equal_to.hpp>
 
 namespace caucho {
 
-#ifdef _WIN32
-template <typename Iterator>
-boost::u32_to_u8_iterator<boost::u16_to_u32_iterator<Iterator> >
-make_u32_to_u8_iterator(const Iterator iterator)
-{
-	return boost::u32_to_u8_iterator<boost::u16_to_u32_iterator<Iterator> >(iterator);
-}
-#else
-template <typename Iterator>
-boost::u32_to_u8_iterator<Iterator>
-make_u32_to_u8_iterator(const Iterator iterator)
-{
-	return boost::u32_to_u8_iterator<Iterator>(iterator);
-}
-#endif
+typedef boost::mpl::if_
+<
+	boost::mpl::equal_to
+	<
+		boost::mpl::sizeof_<string_t::value_type>,
+		boost::mpl::sizeof_<boost::int16_t>
+	>,
+	boost::u32_to_u8_iterator<boost::u16_to_u32_iterator<string_t::const_iterator> >,
+	boost::u32_to_u8_iterator<string_t::const_iterator>
+>::type to_u8_iterator;
 
 const string_t
 fault_exception_impl::CODE(L"code");
@@ -68,8 +64,8 @@ fault_exception_impl::what(const string_t& code, const string_t& message)
 	const string_t what = (format % code % message).str();
 	return std::string
 	(
-		make_u32_to_u8_iterator(what.begin()),
-		make_u32_to_u8_iterator(what.end())
+		to_u8_iterator(what.begin()),
+		to_u8_iterator(what.end())
 	);
 }
 

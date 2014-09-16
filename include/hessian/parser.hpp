@@ -37,7 +37,7 @@ typedef boost::variant
  */
 class HESSIAN_EXPORT parser_exception
 :
-	public exception
+	public virtual exception
 {
 protected:
 	virtual ~parser_exception() BOOST_NOEXCEPT_OR_NOTHROW {}

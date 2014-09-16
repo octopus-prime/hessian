@@ -22,7 +22,7 @@ namespace hessian {
 
 class generator_failure_exception
 :
-	public generator_exception
+	public virtual generator_exception
 {
 public:
 	generator_failure_exception();

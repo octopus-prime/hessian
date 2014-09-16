@@ -14,7 +14,7 @@ namespace caucho {
 
 class exception
 :
-	public std::exception
+	public virtual std::exception
 {
 protected:
 	virtual ~exception() BOOST_NOEXCEPT_OR_NOTHROW {}

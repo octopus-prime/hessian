@@ -10,17 +10,23 @@
 #include <boost/spirit/include/karma.hpp>
 #include <boost/spirit/include/phoenix.hpp>
 #include <boost/regex/pending/unicode_iterator.hpp>
+#include <boost/mpl/equal_to.hpp>
 
 namespace px = boost::phoenix;
 
 namespace hessian {
 namespace generator_impl {
 
-#ifdef _WIN32
-	typedef boost::u32_to_u8_iterator<boost::u16_to_u32_iterator<string_t::const_iterator> > utf_iterator;
-#else
-	typedef boost::u32_to_u8_iterator<string_t::const_iterator> utf_iterator;
-#endif
+typedef boost::mpl::if_
+<
+	boost::mpl::equal_to
+	<
+		boost::mpl::sizeof_<string_t::value_type>,
+		boost::mpl::sizeof_<boost::int16_t>
+	>,
+	boost::u32_to_u8_iterator<boost::u16_to_u32_iterator<string_t::const_iterator> >,
+	boost::u32_to_u8_iterator<string_t::const_iterator>
+>::type to_u8_iterator;
 
 static std::string
 sub_std_string(const string_t& string, const std::size_t length)
@@ -28,8 +34,8 @@ sub_std_string(const string_t& string, const std::size_t length)
 	const string_t substr = string.substr(0, length);
 	return std::string
 	(
-		utf_iterator(substr.begin()),
-		utf_iterator(substr.end())
+		to_u8_iterator(substr.begin()),
+		to_u8_iterator(substr.end())
 	);
 }
 

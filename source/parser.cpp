@@ -22,7 +22,7 @@ typedef qi::expectation_failure<boost::spirit::istream_iterator> expectation_fai
 
 class parser_expectation_exception
 :
-	public parser_exception
+	public virtual parser_exception
 {
 public:
 	parser_expectation_exception(const expectation_failure& failure);
