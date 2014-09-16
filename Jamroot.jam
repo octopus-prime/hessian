@@ -4,6 +4,7 @@ using doxygen ;
 project hessian
 	:
 		requirements
+		<address-model>64
 		<include>include
 	;
 	
@@ -70,7 +71,7 @@ exe hessian_example
 		hessian
 		/site-config//PocoFoundation
 		/site-config//PocoNet
-		/site-config//PocoNetSSL
+#		/site-config//PocoNetSSL
 		/site-config//boost_system
 		/site-config//boost_log
 #		/site-config//pthread
